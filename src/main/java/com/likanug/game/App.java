@@ -2,16 +2,16 @@ package com.likanug.game;
 
 import processing.core.PApplet;
 
-public class Main extends PApplet {
+public class App extends PApplet {
 
 
-    public static int WIDTH = 800;
-    public static int HEIGHT = 600;
+    public static int WIDTH = 640;
+    public static int HEIGHT = 640;
 
     public static final int FPS = 60;
 
     public static void main(String[] args) {
-        PApplet.main("com.likanug.game.Main");
+        PApplet.main("com.likanug.game.App");
     }
 
     @Override
@@ -29,6 +29,11 @@ public class Main extends PApplet {
     @Override
     public void draw() {
 
+    }
+
+    @Override
+    public void mousePressed() {
+        super.mousePressed();
     }
 
     @Override
