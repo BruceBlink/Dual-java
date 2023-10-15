@@ -1,4 +1,4 @@
-package com.likanug.game;
+package com.likanug.dual;
 
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -14,7 +14,7 @@ public class App extends PApplet {
     PFont smallFont, largeFont;
 
     public static void main(String[] args) {
-        PApplet.main("com.likanug.game.App");
+        PApplet.main("com.likanug.dual.App");
     }
 
     @Override
@@ -32,7 +32,7 @@ public class App extends PApplet {
         smallFont = createFont(fontFilePath, 20.0F, true);
         largeFont = createFont(fontFilePath, 96.0F, true);
         //set text font
-        textFont(largeFont, 96.0F);
+        textFont(smallFont, 48.0F);
         // set text, rect and ellipse draw mode are center
         textAlign(CENTER, CENTER);
         rectMode(CENTER);
