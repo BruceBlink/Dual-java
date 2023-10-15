@@ -1,6 +1,7 @@
 package com.likanug.game;
 
 import processing.core.PApplet;
+import processing.core.PFont;
 
 public class App extends PApplet {
 
@@ -9,6 +10,8 @@ public class App extends PApplet {
     public static int HEIGHT = 640;
 
     public static final int FPS = 60;
+
+    PFont smallFont, largeFont;
 
     public static void main(String[] args) {
         PApplet.main("com.likanug.game.App");
@@ -23,6 +26,17 @@ public class App extends PApplet {
     @Override
     public void setup() {
         frameRate(FPS);
+        final String fontFilePath = "Lato-Regular.ttf";
+        //final String fontName = "Lato";
+        //create text font
+        smallFont = createFont(fontFilePath, 20.0F, true);
+        largeFont = createFont(fontFilePath, 96.0F, true);
+        //set text font
+        textFont(largeFont, 96.0F);
+        // set text, rect and ellipse draw mode are center
+        textAlign(CENTER, CENTER);
+        rectMode(CENTER);
+        ellipseMode(CENTER);
     }
 
 
