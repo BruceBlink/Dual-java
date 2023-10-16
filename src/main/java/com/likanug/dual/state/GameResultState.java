@@ -34,7 +34,7 @@ public class GameResultState extends GameSystemState {
         if (properFrameCount > durationFrameCount) {
             app.pushStyle();
             app.textFont(smallFont, 20);
-            app.text("Press X key to reset.", 0, 8);
+            app.text("Press X key to reset.", 0, 80);
             app.popStyle();
         }
     }

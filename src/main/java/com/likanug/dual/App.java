@@ -37,7 +37,7 @@ public class App extends PApplet {
         smallFont = createFont(fontFilePath, 20.0F, true);
         largeFont = createFont(fontFilePath, 96.0F, true);
         //set text font
-        textFont(smallFont, 48.0F);
+        textFont(smallFont, 96);
         // set text, rect and ellipse draw mode are center
         textAlign(CENTER, CENTER);
         rectMode(CENTER);
