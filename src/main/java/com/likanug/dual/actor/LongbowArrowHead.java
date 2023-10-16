@@ -4,8 +4,8 @@ import com.likanug.dual.App;
 
 public class LongbowArrowHead extends LongbowArrowComponent {
 
-    final float halfHeadLength = 24;
-    final float halfHeadWidth = 24;
+    private final float halfHeadLength = 24;
+    private final float halfHeadWidth = 24;
 
     public LongbowArrowHead(App app) {
         super(app);
