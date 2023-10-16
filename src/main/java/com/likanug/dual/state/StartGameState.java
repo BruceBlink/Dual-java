@@ -11,11 +11,9 @@ import static processing.core.PConstants.TWO_PI;
 
 public class StartGameState extends GameSystemState {
 
-    final int frameCountPerNumber = FPS;
-    final float ringSize = 200;
-    final float ringColor = app.color(0);
-    final float ringStrokeWeight = 5;
-    int displayNumber = 4;
+    private final int frameCountPerNumber = FPS;
+    private final float ringSize = 200;
+    private int displayNumber = 4;
 
     public StartGameState(App app) {
         super(app);
@@ -33,25 +31,27 @@ public class StartGameState extends GameSystemState {
         if (currentNumberFrameCount == 0) displayNumber--;
         if (displayNumber <= 0) return;
 
+        float ringColor = 0;
         app.fill(ringColor);
         app.text(displayNumber, 0, 0);
 
         app.rotate(-HALF_PI);
-        app.strokeWeight(3.0F);
+        app.strokeWeight(3);
         app.stroke(ringColor);
         app.noFill();
-        app.arc(0, 0, ringSize, ringSize, 0, TWO_PI * properFrameCount % frameCountPerNumber / frameCountPerNumber);
-        app.strokeWeight(1.0F);
+        app.arc(0, 0, ringSize, ringSize, 0, TWO_PI * (properFrameCount % frameCountPerNumber) / frameCountPerNumber);
+        app.strokeWeight(1);
     }
 
     public void checkStateTransition(GameSystem system) {
         if (properFrameCount >= frameCountPerNumber * 3) {
+            float ringStrokeWeight = 5;
             final Particle newParticle = system.commonParticleSet.builder
                     .type(3)  // Ring
                     .position(INTERNAL_CANVAS_SIDE_LENGTH * 0.5F, INTERNAL_CANVAS_SIDE_LENGTH * 0.5F)
                     .polarVelocity(0, 0)
                     .particleSize((int) ringSize)
-                    .particleColor((int) ringColor)
+                    .particleColor(0)
                     .weight(ringStrokeWeight)
                     .lifespanSecond(1)
                     .build();
