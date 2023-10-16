@@ -10,13 +10,11 @@ import static processing.core.PConstants.HALF_PI;
 
 public class PlayGameState extends GameSystemState {
 
-    int messageDurationFrameCount = FPS;
-
     public PlayGameState(App app) {
         super(app);
     }
 
-    void runSystem(GameSystem system) {
+    public void runSystem(GameSystem system) {
         system.myGroup.update();
         system.myGroup.act();
         system.otherGroup.update();
@@ -32,13 +30,14 @@ public class PlayGameState extends GameSystemState {
         system.commonParticleSet.display();
     }
 
-    void displayMessage(GameSystem system) {
+    public void displayMessage(GameSystem system) {
+        int messageDurationFrameCount = FPS;
         if (properFrameCount >= messageDurationFrameCount) return;
         app.fill(0, (float) (255.0 * (1.0 - properFrameCount / messageDurationFrameCount)));
         app.text("Go", 0.0F, 0.0F);
     }
 
-    void checkStateTransition(GameSystem system) {
+    public void checkStateTransition(GameSystem system) {
         if (system.myGroup.player.isNull()) {
             system.currentState = new GameResultState(app, "You lose.");
         } else if (system.otherGroup.player.isNull()) {
@@ -46,7 +45,7 @@ public class PlayGameState extends GameSystemState {
         }
     }
 
-    void checkCollision() {
+    public void checkCollision() {
         final ActorGroup myGroup = app.system.myGroup;
         final ActorGroup otherGroup = app.system.otherGroup;
 

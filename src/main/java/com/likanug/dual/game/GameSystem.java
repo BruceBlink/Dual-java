@@ -84,48 +84,49 @@ public class GameSystem {
 
         app.pushMatrix();
 
-        if (screenShakeValue > 0.0) {
+        if (screenShakeValue > 0) {
             app.translate(app.random(-screenShakeValue, screenShakeValue), app.random(-screenShakeValue, screenShakeValue));
-            screenShakeValue -= (float) (50.0 / FPS);
+            screenShakeValue -= 50F / FPS;
         }
         currentBackground.update();
         currentBackground.display();
         currentState.run(this);
 
         app.popMatrix();
-        if (demoPlay && showsInstructionWindow) displayDemo();
+        if (demoPlay && showsInstructionWindow)
+            displayDemo();
     }
 
     public void displayDemo() {
         app.pushStyle();
 
         app.stroke(0);
-        app.strokeWeight(2.0F);
-        app.fill(255.0F, 240.0F);
+        app.strokeWeight(2);
+        app.fill(255, 240);
         app.rect(
-                (float) (INTERNAL_CANVAS_SIDE_LENGTH * 0.5),
-                (float) (INTERNAL_CANVAS_SIDE_LENGTH * 0.5),
-                (float) (INTERNAL_CANVAS_SIDE_LENGTH * 0.7),
-                (float) (INTERNAL_CANVAS_SIDE_LENGTH * 0.6)
+                INTERNAL_CANVAS_SIDE_LENGTH * 0.5F,
+                INTERNAL_CANVAS_SIDE_LENGTH * 0.5F,
+                INTERNAL_CANVAS_SIDE_LENGTH * 0.7F,
+                INTERNAL_CANVAS_SIDE_LENGTH * 0.6F
         );
 
-        app.textFont(App.smallFont, 20.0F);
-        app.textLeading(26.0F);
+        app.textFont(App.smallFont, 20);
+        app.textLeading(26);
         app.textAlign(RIGHT, BASELINE);
-        app.fill(0.0F);
-        app.text("Z key:", 280.0F, 180.0F);
-        app.text("X key:", 280.0F, 250.0F);
-        app.text("Arrow key:", 280.0F, 345.0F);
+        app.fill(0);
+        app.text("Z key:", 280, 180);
+        app.text("X key:", 280, 250);
+        app.text("Arrow key:", 280, 345);
         app.textAlign(LEFT);
-        app.text("Weak shot\n (auto aiming)", 300.0F, 180.0F);
-        app.text("Lethal shot\n (manual aiming,\n  requires charge)", 300.0F, 250.0F);
-        app.text("Move\n (or aim lethal shot)", 300.0F, 345.0F);
+        app.text("Weak shot\n (auto aiming)", 300, 180);
+        app.text("Lethal shot\n (manual aiming,\n  requires charge)", 300, 250);
+        app.text("Move\n (or aim lethal shot)", 300, 345);
         app.textAlign(CENTER);
-        app.text("- Press Z key to start -", (float) (INTERNAL_CANVAS_SIDE_LENGTH * 0.5), 430);
-        app.text("(Click to hide this window)", (float) (INTERNAL_CANVAS_SIDE_LENGTH * 0.5), 475);
+        app.text("- Press Z key to start -", INTERNAL_CANVAS_SIDE_LENGTH * 0.5F, 430);
+        app.text("(Click to hide this window)", INTERNAL_CANVAS_SIDE_LENGTH * 0.5F, 475);
         app.popStyle();
 
-        app.strokeWeight(1.0F);
+        app.strokeWeight(1);
     }
 
     public void addSquareParticles(float x, float y, int particleCount, int particleSize, float minSpeed, float maxSpeed, int lifespanSecondValue) {

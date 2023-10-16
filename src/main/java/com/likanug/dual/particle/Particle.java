@@ -85,12 +85,12 @@ public class Particle extends Body implements Poolable<Particle> {
             app.system.commonParticleSet.removingParticleList.add(this);
 
         if (particleTypeNumber == 1) {    // Square
-            rotationAngle += (float) (1.5 * TWO_PI / FPS);
+            rotationAngle += 1.5F * TWO_PI / FPS;
         }
     }
 
     float getProgressRatio() {
-        return PApplet.min((int) 1.0, properFrameCount / lifespanFrameCount);
+        return PApplet.min(1, properFrameCount / lifespanFrameCount);
     }
 
     float getFadeRatio() {

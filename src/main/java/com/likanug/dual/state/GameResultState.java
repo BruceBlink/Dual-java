@@ -8,15 +8,15 @@ import static com.likanug.dual.App.smallFont;
 
 public class GameResultState extends GameSystemState {
 
-    final String resultMessage;
-    final int durationFrameCount = FPS;
+    private final String resultMessage;
+    private final int durationFrameCount = FPS;
 
     GameResultState(App app, String msg) {
         super(app);
         resultMessage = msg;
     }
 
-    void runSystem(GameSystem system) {
+    public void runSystem(GameSystem system) {
         system.myGroup.update();
         system.otherGroup.update();
         system.myGroup.displayPlayer();
@@ -26,7 +26,7 @@ public class GameResultState extends GameSystemState {
         system.commonParticleSet.display();
     }
 
-    void displayMessage(GameSystem system) {
+    public void displayMessage(GameSystem system) {
         if (system.demoPlay) return;
 
         app.fill(0);
@@ -39,7 +39,7 @@ public class GameResultState extends GameSystemState {
         }
     }
 
-    void checkStateTransition(GameSystem system) {
+    public void checkStateTransition(GameSystem system) {
         if (system.demoPlay) {
             if (properFrameCount > durationFrameCount * 3) {
                 app.newGame(true, system.showsInstructionWindow);
