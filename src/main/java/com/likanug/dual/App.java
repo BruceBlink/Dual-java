@@ -13,9 +13,10 @@ public class App extends PApplet {
     public static PFont smallFont, largeFont;
 
     public KeyInput currentKeyInput;
+
     public GameSystem system;
 
-    public boolean paused;
+    private boolean paused;
 
     public static void main(String[] args) {
         PApplet.main("com.likanug.dual.App");

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.likanug.game'
-version = '1.0-SNAPSHOT'
+version = '1.0'
 
 repositories {
     mavenCentral()
@@ -26,7 +26,7 @@ test {
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
-        attributes 'Main-Class': 'com.likanug.game.Main'
+        attributes 'Main-Class': 'com.likanug.dual.App'
     }
     from {
         configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
