@@ -11,10 +11,10 @@ import static processing.core.PApplet.cos;
 import static processing.core.PApplet.sin;
 import static processing.core.PConstants.TWO_PI;
 
-public class Particle extends Body implements Poolable {
+public class Particle extends Body implements Poolable<Particle> {
 
     boolean allocatedIndicator;
-    ObjectPool belongingPool;
+    ObjectPool<Particle> belongingPool;
     int allocationIdentifier;
 
     float rotationAngle;
@@ -39,11 +39,11 @@ public class Particle extends Body implements Poolable {
         allocatedIndicator = indicator;
     }
 
-    public ObjectPool getBelongingPool() {
+    public ObjectPool<Particle> getBelongingPool() {
         return belongingPool;
     }
 
-    public void setBelongingPool(ObjectPool pool) {
+    public void setBelongingPool(ObjectPool<Particle> pool) {
         belongingPool = pool;
     }
 

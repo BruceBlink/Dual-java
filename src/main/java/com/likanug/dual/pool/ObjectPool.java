@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import static processing.core.PApplet.println;
 
-public class ObjectPool<T extends Poolable> {
+public class ObjectPool<T extends Poolable<T>> {
     public final int poolSize;
     public final ArrayList<T> pool;
     public int index = 0;

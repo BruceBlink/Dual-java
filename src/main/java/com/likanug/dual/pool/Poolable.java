@@ -1,13 +1,13 @@
 package com.likanug.dual.pool;
 
-public interface Poolable {
+public interface Poolable<T extends Poolable<T>> {
     boolean isAllocated();
 
     void setAllocated(boolean indicator);
 
-    ObjectPool getBelongingPool();
+    ObjectPool<T> getBelongingPool();
 
-    void setBelongingPool(ObjectPool pool);
+    void setBelongingPool(ObjectPool<T> pool);
 
     int getAllocationIdentifier();  // -1 : not allocated
 
