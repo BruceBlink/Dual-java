@@ -2,10 +2,42 @@ package com.likanug.dual.inputDevice;
 
 public abstract class AbstractInputDevice {
 
-    public int horizontalMoveButton;
-    public int verticalMoveButton;
-    public boolean shotButtonPressed;
-    public boolean longShotButtonPressed;
+    protected int horizontalMoveButton;
+    protected int verticalMoveButton;
+    protected boolean shotButtonPressed;
+    protected boolean longShotButtonPressed;
+
+    public int getHorizontalMoveButton() {
+        return horizontalMoveButton;
+    }
+
+    public void setHorizontalMoveButton(int horizontalMoveButton) {
+        this.horizontalMoveButton = horizontalMoveButton;
+    }
+
+    public int getVerticalMoveButton() {
+        return verticalMoveButton;
+    }
+
+    public void setVerticalMoveButton(int verticalMoveButton) {
+        this.verticalMoveButton = verticalMoveButton;
+    }
+
+    public boolean isShotButtonPressed() {
+        return shotButtonPressed;
+    }
+
+    public void setShotButtonPressed(boolean shotButtonPressed) {
+        this.shotButtonPressed = shotButtonPressed;
+    }
+
+    public boolean isLongShotButtonPressed() {
+        return longShotButtonPressed;
+    }
+
+    public void setLongShotButtonPressed(boolean longShotButtonPressed) {
+        this.longShotButtonPressed = longShotButtonPressed;
+    }
 
     public void operateMoveButton(int horizontal, int vertical) {
         horizontalMoveButton = horizontal;

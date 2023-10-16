@@ -5,10 +5,15 @@ import com.likanug.dual.inputDevice.KeyInput;
 
 public class HumanPlayerEngine extends PlayerEngine {
 
-    final KeyInput currentKeyInput;
+    private final KeyInput currentKeyInput;
 
     public HumanPlayerEngine(KeyInput _keyInput) {
         currentKeyInput = _keyInput;
+    }
+
+
+    public KeyInput getCurrentKeyInput() {
+        return currentKeyInput;
     }
 
     public void run(PlayerActor player) {

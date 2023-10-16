@@ -13,18 +13,18 @@ import static processing.core.PConstants.TWO_PI;
 
 public class Particle extends GameObject implements Poolable<Particle> {
 
-    boolean allocatedIndicator;
-    ObjectPool<Particle> belongingPool;
-    int allocationIdentifier;
+    private boolean allocatedIndicator;
+    private ObjectPool<Particle> belongingPool;
+    private int allocationIdentifier;
 
-    float rotationAngle;
-    int displayColor;
-    float strokeWeightValue;
-    float displaySize;
+    private float rotationAngle;
+    private int displayColor;
+    private float strokeWeightValue;
+    private float displaySize;
 
-    int lifespanFrameCount;
-    int properFrameCount;
-    int particleTypeNumber;
+    private int lifespanFrameCount;
+    private int properFrameCount;
+    private int particleTypeNumber;
 
     public Particle(App app) {
         this.app = app;
@@ -82,18 +82,18 @@ public class Particle extends GameObject implements Poolable<Particle> {
 
         properFrameCount++;
         if (properFrameCount > lifespanFrameCount)
-            app.system.commonParticleSet.removingParticleList.add(this);
+            app.system.commonParticleSet.getRemovingParticleList().add(this);
 
         if (particleTypeNumber == 1) {    // Square
             rotationAngle += 1.5F * TWO_PI / FPS;
         }
     }
 
-    float getProgressRatio() {
+    public float getProgressRatio() {
         return PApplet.min(1, properFrameCount / lifespanFrameCount);
     }
 
-    float getFadeRatio() {
+    public float getFadeRatio() {
         return 1 - getProgressRatio();
     }
 
@@ -127,5 +127,69 @@ public class Particle extends GameObject implements Poolable<Particle> {
             default -> {
             }
         }
+    }
+
+    public boolean isAllocatedIndicator() {
+        return allocatedIndicator;
+    }
+
+    public void setAllocatedIndicator(boolean allocatedIndicator) {
+        this.allocatedIndicator = allocatedIndicator;
+    }
+
+    public float getRotationAngle() {
+        return rotationAngle;
+    }
+
+    public void setRotationAngle(float rotationAngle) {
+        this.rotationAngle = rotationAngle;
+    }
+
+    public int getDisplayColor() {
+        return displayColor;
+    }
+
+    public void setDisplayColor(int displayColor) {
+        this.displayColor = displayColor;
+    }
+
+    public float getStrokeWeightValue() {
+        return strokeWeightValue;
+    }
+
+    public void setStrokeWeightValue(float strokeWeightValue) {
+        this.strokeWeightValue = strokeWeightValue;
+    }
+
+    public float getDisplaySize() {
+        return displaySize;
+    }
+
+    public void setDisplaySize(float displaySize) {
+        this.displaySize = displaySize;
+    }
+
+    public int getLifespanFrameCount() {
+        return lifespanFrameCount;
+    }
+
+    public void setLifespanFrameCount(int lifespanFrameCount) {
+        this.lifespanFrameCount = lifespanFrameCount;
+    }
+
+    public int getProperFrameCount() {
+        return properFrameCount;
+    }
+
+    public void setProperFrameCount(int properFrameCount) {
+        this.properFrameCount = properFrameCount;
+    }
+
+    public int getParticleTypeNumber() {
+        return particleTypeNumber;
+    }
+
+    public void setParticleTypeNumber(int particleTypeNumber) {
+        this.particleTypeNumber = particleTypeNumber;
     }
 }

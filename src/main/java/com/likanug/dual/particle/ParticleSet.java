@@ -7,16 +7,16 @@ import java.util.ArrayList;
 
 public class ParticleSet {
 
-    public final ArrayList<Particle> particleList;
-    public final ArrayList<Particle> removingParticleList;
-    public final ObjectPool<Particle> particlePool;
-    public final ParticleBuilder builder;
+    private final ArrayList<Particle> particleList;
+    private final ArrayList<Particle> removingParticleList;
+    private final ObjectPool<Particle> particlePool;
+    private final ParticleBuilder builder;
 
 
     public ParticleSet(int capacity, App app) {
         particlePool = new ObjectPool<>(capacity);
         for (int i = 0; i < capacity; i++) {
-            particlePool.pool.add(new Particle(app));
+            particlePool.getPool().add(new Particle(app));
         }
 
         particleList = new ArrayList<>(capacity);
@@ -46,8 +46,23 @@ public class ParticleSet {
         }
     }
 
-    Particle allocate() {
+    public Particle allocate() {
         return particlePool.allocate();
     }
 
+    public ArrayList<Particle> getParticleList() {
+        return particleList;
+    }
+
+    public ArrayList<Particle> getRemovingParticleList() {
+        return removingParticleList;
+    }
+
+    public ObjectPool<Particle> getParticlePool() {
+        return particlePool;
+    }
+
+    public ParticleBuilder getBuilder() {
+        return builder;
+    }
 }

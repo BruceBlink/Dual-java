@@ -16,7 +16,7 @@ public abstract class LongbowArrowComponent extends AbstractArrowActor {
         final float particleDirectionAngle = this.directionAngle + PI + app.random(-HALF_PI, HALF_PI);
         for (int i = 0; i < 5; i++) {
             final float particleSpeed = app.random(2, 4);
-            final Particle newParticle = app.system.commonParticleSet.builder
+            final Particle newParticle = app.system.commonParticleSet.getBuilder()
                     .type(1)  // Square
                     .position(this.xPosition, this.yPosition)
                     .polarVelocity(particleDirectionAngle, particleSpeed)
@@ -24,7 +24,7 @@ public abstract class LongbowArrowComponent extends AbstractArrowActor {
                     .particleColor(64)
                     .lifespanSecond(1)
                     .build();
-            app.system.commonParticleSet.particleList.add(newParticle);
+            app.system.commonParticleSet.getParticleList().add(newParticle);
         }
     }
 

@@ -1,6 +1,6 @@
 package com.likanug.dual.inputDevice;
 
-public class DisabledInputDevice extends AbstractInputDevice {
+public class DisabledInputDevice extends InputDevice {
 
     public void operateMoveButton(int horizontal, int vertical) {
     }

@@ -22,8 +22,8 @@ public abstract class PlayerActorState {
 
 
     public float getEnemyPlayerActorAngle(PlayerActor parentActor) {
-        final AbstractPlayerActor enemyPlayer = parentActor.group.enemyGroup.player;
-        return atan2(enemyPlayer.yPosition - parentActor.yPosition, enemyPlayer.xPosition - parentActor.xPosition);
+        final AbstractPlayerActor enemyPlayer = parentActor.getGroup().getEnemyGroup().getPlayer();
+        return atan2(enemyPlayer.getyPosition() - parentActor.getyPosition(), enemyPlayer.getxPosition() - parentActor.getxPosition());
     }
 
     public boolean isDamaged() {

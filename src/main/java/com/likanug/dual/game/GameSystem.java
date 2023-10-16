@@ -32,34 +32,34 @@ public class GameSystem {
         // prepare ActorGroup
         this.myGroup = new ActorGroup();
         this.otherGroup = new ActorGroup();
-        this.myGroup.enemyGroup = otherGroup;
-        this.otherGroup.enemyGroup = myGroup;
+        this.myGroup.setEnemyGroup(otherGroup);
+        this.otherGroup.setEnemyGroup(myGroup);
 
         // prepare PlayerActorState
         final MovePlayerActorState moveState = new MovePlayerActorState(app);
         final DrawBowPlayerActorState drawShortbowState = new DrawShortbowPlayerActorState(app);
         final DrawBowPlayerActorState drawLongbowState = new DrawLongbowPlayerActorState(app);
         this.damagedState = new DamagedPlayerActorState(app);
-        moveState.drawShortbowState = drawShortbowState;
-        moveState.drawLongbowState = drawLongbowState;
-        drawShortbowState.moveState = moveState;
-        drawLongbowState.moveState = moveState;
-        this.damagedState.moveState = moveState;
+        moveState.setDrawShortbowState(drawShortbowState);
+        moveState.setDrawLongbowState(drawLongbowState);
+        drawShortbowState.setMoveState(moveState);
+        drawLongbowState.setMoveState(moveState);
+        this.damagedState.setMoveState(moveState);
 
         // prepare PlayerActor
         PlayerEngine myEngine;
         if (demo) myEngine = new ComputerPlayerEngine(app);
         else myEngine = new HumanPlayerEngine(app.currentKeyInput);
         PlayerActor myPlayer = new PlayerActor(myEngine, 255, app);
-        myPlayer.xPosition = (float) (INTERNAL_CANVAS_SIDE_LENGTH * 0.5);
-        myPlayer.yPosition = (float) (INTERNAL_CANVAS_SIDE_LENGTH - 100);
-        myPlayer.state = moveState;
+        myPlayer.setxPosition(INTERNAL_CANVAS_SIDE_LENGTH * 0.5F);
+        myPlayer.setyPosition(INTERNAL_CANVAS_SIDE_LENGTH - 100);
+        myPlayer.setState(moveState);
         this.myGroup.setPlayer(myPlayer);
         PlayerEngine otherEngine = new ComputerPlayerEngine(app);
         PlayerActor otherPlayer = new PlayerActor(otherEngine, 0, app);
-        otherPlayer.xPosition = (float) (INTERNAL_CANVAS_SIDE_LENGTH * 0.5);
-        otherPlayer.yPosition = 100;
-        otherPlayer.state = moveState;
+        otherPlayer.setxPosition((float) (INTERNAL_CANVAS_SIDE_LENGTH * 0.5));
+        otherPlayer.setyPosition(100);
+        otherPlayer.setState(moveState);
         this.otherGroup.setPlayer(otherPlayer);
 
         // other
@@ -130,8 +130,7 @@ public class GameSystem {
     }
 
     public void addSquareParticles(float x, float y, int particleCount, int particleSize, float minSpeed, float maxSpeed, int lifespanSecondValue) {
-        final ParticleBuilder builder = app.system.commonParticleSet
-                .builder
+        final ParticleBuilder builder = app.system.commonParticleSet.getBuilder()
                 .type(1)  // Square
                 .position(x, y)
                 .particleSize(particleSize)
@@ -141,7 +140,7 @@ public class GameSystem {
             final Particle newParticle = builder
                     .polarVelocity(app.random(TWO_PI), app.random(minSpeed, maxSpeed))
                     .build();
-            app.system.commonParticleSet.particleList.add(newParticle);
+            app.system.commonParticleSet.getParticleList().add(newParticle);
         }
     }
 }

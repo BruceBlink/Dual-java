@@ -46,7 +46,7 @@ public class StartGameState extends GameSystemState {
     public void checkStateTransition(GameSystem system) {
         if (properFrameCount >= frameCountPerNumber * 3) {
             float ringStrokeWeight = 5;
-            final Particle newParticle = system.commonParticleSet.builder
+            final Particle newParticle = system.commonParticleSet.getBuilder()
                     .type(3)  // Ring
                     .position(INTERNAL_CANVAS_SIDE_LENGTH * 0.5F, INTERNAL_CANVAS_SIDE_LENGTH * 0.5F)
                     .polarVelocity(0, 0)
@@ -55,7 +55,7 @@ public class StartGameState extends GameSystemState {
                     .weight(ringStrokeWeight)
                     .lifespanSecond(1)
                     .build();
-            system.commonParticleSet.particleList.add(newParticle);
+            system.commonParticleSet.getParticleList().add(newParticle);
 
             system.currentState = new PlayGameState(app);
         }

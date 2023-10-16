@@ -11,15 +11,31 @@ import static processing.core.PConstants.*;
 
 public class KillPlayerPlan extends PlayerPlan {
 
-    PlayerPlan movePlan, escapePlan;
+    private PlayerPlan movePlan, escapePlan;
+
+    public PlayerPlan getMovePlan() {
+        return movePlan;
+    }
+
+    public void setMovePlan(PlayerPlan movePlan) {
+        this.movePlan = movePlan;
+    }
+
+    public PlayerPlan getEscapePlan() {
+        return escapePlan;
+    }
+
+    public void setEscapePlan(PlayerPlan escapePlan) {
+        this.escapePlan = escapePlan;
+    }
 
     public KillPlayerPlan(App app) {
         this.app = app;
     }
 
-    void execute(PlayerActor player, AbstractInputDevice input) {
+    public void execute(PlayerActor player, AbstractInputDevice input) {
         int horizontalMove;
-        final float relativeAngle = player.getAngle(player.group.enemyGroup.player) - player.aimAngle;
+        final float relativeAngle = player.getAngle(player.getGroup().getEnemyGroup().getPlayer()) - player.getAimAngle();
         if (abs(relativeAngle) < radians(1)) horizontalMove = 0;
         else {
             if ((relativeAngle + TWO_PI) % TWO_PI > PI) horizontalMove = -1;
@@ -29,15 +45,16 @@ public class KillPlayerPlan extends PlayerPlan {
 
         input.operateShotButton(false);
 
-        input.operateLongShotButton(!player.state.hasCompletedLongBowCharge(player) || !(app.random(1) < 0.05));
+        input.operateLongShotButton(!player.getState().hasCompletedLongBowCharge(player) || !(app.random(1) < 0.05));
     }
 
-    PlayerPlan nextPlan(PlayerActor player) {
-        final AbstractPlayerActor enemy = player.group.enemyGroup.player;
+    public PlayerPlan nextPlan(PlayerActor player) {
+        final AbstractPlayerActor enemy = player.getGroup().getEnemyGroup().getPlayer();
 
-        if (abs(player.getAngle(player.group.enemyGroup.player) - player.aimAngle) > QUARTER_PI) return movePlan;
+        if (abs(player.getAngle(player.getGroup().getEnemyGroup().getPlayer()) - player.getAimAngle()) > QUARTER_PI)
+            return movePlan;
         if (player.getDistance(enemy) < 400.0) return movePlan;
-        if (!player.engine.controllingInputDevice.longShotButtonPressed) return movePlan;
+        if (!player.getEngine().controllingInputDevice.isLongShotButtonPressed()) return movePlan;
 
         return this;
     }

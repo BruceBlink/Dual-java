@@ -6,12 +6,15 @@ import com.likanug.dual.inputDevice.InputDevice;
 
 public abstract class PlayerEngine {
 
-    public final AbstractInputDevice controllingInputDevice;
+    protected final AbstractInputDevice controllingInputDevice;
 
-    PlayerEngine() {
+    protected PlayerEngine() {
         controllingInputDevice = new InputDevice();
     }
 
     public abstract void run(PlayerActor player);
 
+    public AbstractInputDevice getControllingInputDevice() {
+        return controllingInputDevice;
+    }
 }

@@ -12,31 +12,31 @@ import static processing.core.PConstants.QUARTER_PI;
 
 public class DrawShortbowPlayerActorState extends DrawBowPlayerActorState {
 
-    public final int fireIntervalFrameCount = (int) (FPS * 0.2);
+    private final int fireIntervalFrameCount = (int) (FPS * 0.2);
 
     public DrawShortbowPlayerActorState(App app) {
         super(app);
     }
 
     public void aim(PlayerActor parentActor, AbstractInputDevice input) {
-        parentActor.aimAngle = getEnemyPlayerActorAngle(parentActor);
+        parentActor.setAimAngle(getEnemyPlayerActorAngle(parentActor));
     }
 
     public void fire(PlayerActor parentActor) {
         ShortbowArrow newArrow = new ShortbowArrow(app);
-        final float directionAngle = parentActor.aimAngle;
-        newArrow.xPosition = parentActor.xPosition + 24 * cos(directionAngle);
-        newArrow.yPosition = parentActor.yPosition + 24 * sin(directionAngle);
-        newArrow.rotationAngle = directionAngle;
+        final float directionAngle = parentActor.getAimAngle();
+        newArrow.setxPosition(parentActor.getxPosition() + 24 * cos(directionAngle));
+        newArrow.setyPosition(parentActor.getyPosition() + 24 * sin(directionAngle));
+        newArrow.setRotationAngle(directionAngle);
         newArrow.setVelocity(directionAngle, 24);
 
-        parentActor.group.addArrow(newArrow);
+        parentActor.getGroup().addArrow(newArrow);
     }
 
     public void displayEffect(PlayerActor parentActor) {
-        app.line(0, 0, 70 * cos(parentActor.aimAngle), 70 * sin(parentActor.aimAngle));
+        app.line(0, 0, 70 * cos(parentActor.getAimAngle()), 70 * sin(parentActor.getAimAngle()));
         app.noFill();
-        app.arc(0, 0, 100, 100, parentActor.aimAngle - QUARTER_PI, parentActor.aimAngle + QUARTER_PI);
+        app.arc(0, 0, 100, 100, parentActor.getAimAngle() - QUARTER_PI, parentActor.getAimAngle() + QUARTER_PI);
     }
 
     public PlayerActorState entryState(PlayerActor parentActor) {
@@ -44,7 +44,7 @@ public class DrawShortbowPlayerActorState extends DrawBowPlayerActorState {
     }
 
     public boolean buttonPressed(AbstractInputDevice input) {
-        return input.shotButtonPressed;
+        return input.isShotButtonPressed();
     }
 
     public boolean triggerPulled(PlayerActor parentActor) {

@@ -10,12 +10,12 @@ import static processing.core.PConstants.QUARTER_PI;
 
 public class ShortbowArrow extends AbstractArrowActor {
 
-    public final float terminalSpeed;
+    private final float terminalSpeed;
 
-    public final float halfHeadLength = 8.0F;
-    public final float halfHeadWidth = 4.0F;
-    public final float halfFeatherWidth = 4.0F;
-    public final float featherLength = 8.0F;
+    private final float halfHeadLength = 8.0F;
+    private final float halfHeadWidth = 4.0F;
+    private final float halfFeatherWidth = 4.0F;
+    private final float featherLength = 8.0F;
 
     public ShortbowArrow(App app) {
         super(8.0F, 20.0F, app);
@@ -30,13 +30,13 @@ public class ShortbowArrow extends AbstractArrowActor {
         speed += (float) ((terminalSpeed - speed) * 0.1);
     }
 
-    void act() {
+    public void act() {
         if (app.random(1) >= 0.5) return;
 
         final float particleDirectionAngle = this.directionAngle + PI + app.random(-QUARTER_PI, QUARTER_PI);
         for (int i = 0; i < 3; i++) {
             final float particleSpeed = app.random(0.5F, 2.0F);
-            final Particle newParticle = app.system.commonParticleSet.builder
+            final Particle newParticle = app.system.commonParticleSet.getBuilder()
                     .type(1)  // Square
                     .position(this.xPosition, this.yPosition)
                     .polarVelocity(particleDirectionAngle, particleSpeed)
@@ -44,7 +44,7 @@ public class ShortbowArrow extends AbstractArrowActor {
                     .particleColor(app.color(192))
                     .lifespanSecond((int) 0.5)
                     .build();
-            app.system.commonParticleSet.particleList.add(newParticle);
+            app.system.commonParticleSet.getParticleList().add(newParticle);
         }
     }
 

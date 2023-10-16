@@ -5,8 +5,8 @@ import com.likanug.dual.common.GameObject;
 
 public abstract class Actor extends GameObject {
 
-    public ActorGroup group;
-    public float rotationAngle;
+    protected ActorGroup group;
+    protected float rotationAngle;
     protected final float collisionRadius;
 
     protected Actor(float _collisionRadius, App app) {
@@ -18,5 +18,25 @@ public abstract class Actor extends GameObject {
 
     public boolean isNotCollided(Actor other) {
         return !(getDistance(other) < this.collisionRadius + other.collisionRadius);
+    }
+
+    public ActorGroup getGroup() {
+        return group;
+    }
+
+    public void setGroup(ActorGroup group) {
+        this.group = group;
+    }
+
+    public float getRotationAngle() {
+        return rotationAngle;
+    }
+
+    public void setRotationAngle(float rotationAngle) {
+        this.rotationAngle = rotationAngle;
+    }
+
+    public float getCollisionRadius() {
+        return collisionRadius;
     }
 }

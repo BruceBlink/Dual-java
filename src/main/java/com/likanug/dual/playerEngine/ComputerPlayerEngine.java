@@ -6,8 +6,8 @@ import com.likanug.dual.actor.PlayerActor;
 public class ComputerPlayerEngine extends PlayerEngine {
 
     private final App app;
-    final int planUpdateFrameCount = 10;
-    PlayerPlan currentPlan;
+    private final int planUpdateFrameCount = 10;
+    private PlayerPlan currentPlan;
 
     public ComputerPlayerEngine(App app) {
         this.app = app;
@@ -15,15 +15,31 @@ public class ComputerPlayerEngine extends PlayerEngine {
         final MovePlayerPlan move = new MovePlayerPlan(app);
         final JabPlayerPlan jab = new JabPlayerPlan(app);
         final KillPlayerPlan kill = new KillPlayerPlan(app);
-        move.movePlan = move;
-        move.jabPlan = jab;
-        move.killPlan = kill;
-        jab.movePlan = move;
-        jab.jabPlan = jab;
-        jab.killPlan = kill;
-        kill.movePlan = move;
+        move.setMovePlan(move);
+        move.setJabPlan(jab);
+        move.setKillPlan(kill);
+        jab.setMovePlan(move);
+        jab.setJabPlan(jab);
+        jab.setKillPlan(kill);
+        kill.setMovePlan(move);
 
         currentPlan = move;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public int getPlanUpdateFrameCount() {
+        return planUpdateFrameCount;
+    }
+
+    public PlayerPlan getCurrentPlan() {
+        return currentPlan;
+    }
+
+    public void setCurrentPlan(PlayerPlan currentPlan) {
+        this.currentPlan = currentPlan;
     }
 
     public void run(PlayerActor player) {

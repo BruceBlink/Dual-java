@@ -11,18 +11,56 @@ import static processing.core.PConstants.TWO_PI;
 
 public class PlayerActor extends AbstractPlayerActor {
 
-    final float bodySize = 32.0F;
-    final float halfBodySize = bodySize * 0.5F;
-    final int fillColor;
+    private final float bodySize = 32.0F;
+    private final float halfBodySize = bodySize * 0.5F;
+    private final int fillColor;
 
-    public float aimAngle;
-    public int chargedFrameCount;
-    public int damageRemainingFrameCount;
+    private float aimAngle;
+    private int chargedFrameCount;
+    private int damageRemainingFrameCount;
 
     public PlayerActor(PlayerEngine _engine, int col, App app) {
         super(16, _engine, app);
         fillColor = col;
     }
+
+    public float getBodySize() {
+        return bodySize;
+    }
+
+    public float getHalfBodySize() {
+        return halfBodySize;
+    }
+
+    public int getFillColor() {
+        return fillColor;
+    }
+
+    public float getAimAngle() {
+        return aimAngle;
+    }
+
+    public void setAimAngle(float aimAngle) {
+        this.aimAngle = aimAngle;
+    }
+
+    public int getChargedFrameCount() {
+        return chargedFrameCount;
+    }
+
+    public void setChargedFrameCount(int chargedFrameCount) {
+        this.chargedFrameCount = chargedFrameCount;
+    }
+
+    public int getDamageRemainingFrameCount() {
+        return damageRemainingFrameCount;
+    }
+
+    public void setDamageRemainingFrameCount(int damageRemainingFrameCount) {
+        this.damageRemainingFrameCount = damageRemainingFrameCount;
+    }
+
+
 
     public void addVelocity(float xAcceleration, float yAcceleration) {
         xVelocity = constrain(xVelocity + xAcceleration, -10, 10);

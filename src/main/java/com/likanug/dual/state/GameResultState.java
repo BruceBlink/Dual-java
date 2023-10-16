@@ -11,7 +11,7 @@ public class GameResultState extends GameSystemState {
     private final String resultMessage;
     private final int durationFrameCount = FPS;
 
-    GameResultState(App app, String msg) {
+    public GameResultState(App app, String msg) {
         super(app);
         resultMessage = msg;
     }

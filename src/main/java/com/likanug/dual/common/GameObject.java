@@ -5,13 +5,16 @@ import com.likanug.dual.App;
 import static processing.core.PApplet.*;
 
 public abstract class GameObject extends AbstractGameObject {
+
     protected App app;
-    public float xPosition;
-    public float yPosition;
-    public float xVelocity;
-    public float yVelocity;
-    public float directionAngle;
-    public float speed;
+
+    protected float xPosition;
+
+    protected float yPosition;
+    protected float xVelocity;
+    protected float yVelocity;
+    protected float directionAngle;
+    protected float speed;
 
     public void update() {
         xPosition += xVelocity;
@@ -19,6 +22,62 @@ public abstract class GameObject extends AbstractGameObject {
     }
 
     public abstract void display();
+
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
+    }
+
+    public float getxPosition() {
+        return xPosition;
+    }
+
+    public void setxPosition(float xPosition) {
+        this.xPosition = xPosition;
+    }
+
+    public float getyPosition() {
+        return yPosition;
+    }
+
+    public void setyPosition(float yPosition) {
+        this.yPosition = yPosition;
+    }
+
+    public float getxVelocity() {
+        return xVelocity;
+    }
+
+    public void setxVelocity(float xVelocity) {
+        this.xVelocity = xVelocity;
+    }
+
+    public float getyVelocity() {
+        return yVelocity;
+    }
+
+    public void setyVelocity(float yVelocity) {
+        this.yVelocity = yVelocity;
+    }
+
+    public float getDirectionAngle() {
+        return directionAngle;
+    }
+
+    public void setDirectionAngle(float directionAngle) {
+        this.directionAngle = directionAngle;
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
 
     public void setVelocity(float dir, float spd) {
         directionAngle = dir;

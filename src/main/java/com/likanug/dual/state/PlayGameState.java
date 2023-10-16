@@ -5,7 +5,7 @@ import com.likanug.dual.actor.*;
 import com.likanug.dual.game.GameSystem;
 
 import static com.likanug.dual.App.FPS;
-import static processing.core.PApplet.*;
+import static processing.core.PApplet.atan2;
 import static processing.core.PConstants.HALF_PI;
 
 public class PlayGameState extends GameSystemState {
@@ -38,9 +38,9 @@ public class PlayGameState extends GameSystemState {
     }
 
     public void checkStateTransition(GameSystem system) {
-        if (system.myGroup.player.isNull()) {
+        if (system.myGroup.getPlayer().isNull()) {
             system.currentState = new GameResultState(app, "You lose.");
-        } else if (system.otherGroup.player.isNull()) {
+        } else if (system.otherGroup.getPlayer().isNull()) {
             system.currentState = new GameResultState(app, "You win.");
         }
     }
@@ -49,56 +49,56 @@ public class PlayGameState extends GameSystemState {
         final ActorGroup myGroup = app.system.myGroup;
         final ActorGroup otherGroup = app.system.otherGroup;
 
-        for (AbstractArrowActor eachMyArrow : myGroup.arrowList) {
-            for (AbstractArrowActor eachEnemyArrow : otherGroup.arrowList) {
+        for (AbstractArrowActor eachMyArrow : myGroup.getArrowList()) {
+            for (AbstractArrowActor eachEnemyArrow : otherGroup.getArrowList()) {
                 if (eachMyArrow.isNotCollided(eachEnemyArrow)) continue;
                 breakArrow(eachMyArrow, myGroup);
                 breakArrow(eachEnemyArrow, otherGroup);
             }
         }
 
-        if (!otherGroup.player.isNull()) {
-            for (AbstractArrowActor eachMyArrow : myGroup.arrowList) {
+        if (!otherGroup.getPlayer().isNull()) {
+            for (AbstractArrowActor eachMyArrow : myGroup.getArrowList()) {
 
-                AbstractPlayerActor enemyPlayer = otherGroup.player;
+                AbstractPlayerActor enemyPlayer = otherGroup.getPlayer();
                 if (eachMyArrow.isNotCollided(enemyPlayer)) continue;
 
-                if (eachMyArrow.isLethal()) killPlayer(otherGroup.player);
+                if (eachMyArrow.isLethal()) killPlayer(otherGroup.getPlayer());
                 else thrustPlayerActor(eachMyArrow, (PlayerActor) enemyPlayer);
 
                 breakArrow(eachMyArrow, myGroup);
             }
         }
 
-        if (!myGroup.player.isNull()) {
-            for (AbstractArrowActor eachEnemyArrow : otherGroup.arrowList) {
-                if (eachEnemyArrow.isNotCollided(myGroup.player)) continue;
+        if (!myGroup.getPlayer().isNull()) {
+            for (AbstractArrowActor eachEnemyArrow : otherGroup.getArrowList()) {
+                if (eachEnemyArrow.isNotCollided(myGroup.getPlayer())) continue;
 
-                if (eachEnemyArrow.isLethal()) killPlayer(myGroup.player);
-                else thrustPlayerActor(eachEnemyArrow, (PlayerActor) myGroup.player);
+                if (eachEnemyArrow.isLethal()) killPlayer(myGroup.getPlayer());
+                else thrustPlayerActor(eachEnemyArrow, (PlayerActor) myGroup.getPlayer());
 
                 breakArrow(eachEnemyArrow, otherGroup);
             }
         }
     }
 
-    void killPlayer(AbstractPlayerActor player) {
-        app.system.addSquareParticles(player.xPosition, player.yPosition, 50, 16, 2, 10, 4);
-        player.group.player = new NullPlayerActor(app);
+    public void killPlayer(AbstractPlayerActor player) {
+        app.system.addSquareParticles(player.getxPosition(), player.getyPosition(), 50, 16, 2, 10, 4);
+        player.getGroup().setPlayer(new NullPlayerActor(app));
         app.system.screenShakeValue = 50;
     }
 
-    void breakArrow(AbstractArrowActor arrow, ActorGroup group) {
-        app.system.addSquareParticles(arrow.xPosition, arrow.yPosition, 10, 7, 1, 5, 1);
-        group.removingArrowList.add(arrow);
+    public void breakArrow(AbstractArrowActor arrow, ActorGroup group) {
+        app.system.addSquareParticles(arrow.getxPosition(), arrow.getyPosition(), 10, 7, 1, 5, 1);
+        group.getRemovingArrowList().add(arrow);
     }
 
-    void thrustPlayerActor(Actor referenceActor, PlayerActor targetPlayerActor) {
-        final float relativeAngle = atan2(targetPlayerActor.yPosition - referenceActor.yPosition, targetPlayerActor.xPosition - referenceActor.xPosition);
+    public void thrustPlayerActor(Actor referenceActor, PlayerActor targetPlayerActor) {
+        final float relativeAngle = atan2(targetPlayerActor.getyPosition() - referenceActor.getyPosition(), targetPlayerActor.getxPosition() - referenceActor.getxPosition());
         final float thrustAngle = relativeAngle + app.random((float) (-0.5 * HALF_PI), (float) (0.5 * HALF_PI));
-        targetPlayerActor.xVelocity += 20 * cos(thrustAngle);
-        targetPlayerActor.yVelocity += 20 * sin(thrustAngle);
-        targetPlayerActor.state = app.system.damagedState.entryState(targetPlayerActor);
+        targetPlayerActor.setxVelocity(targetPlayerActor.getxVelocity() * 20);
+        targetPlayerActor.setyVelocity(targetPlayerActor.getyVelocity() * 20);
+        targetPlayerActor.setState(app.system.damagedState.entryState(targetPlayerActor));
         app.system.screenShakeValue += 10;
     }
 }

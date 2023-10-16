@@ -3,11 +3,11 @@ package com.likanug.dual.actor;
 import java.util.ArrayList;
 
 public class ActorGroup {
-    public ActorGroup enemyGroup;
+    private ActorGroup enemyGroup;
 
-    public AbstractPlayerActor player;
-    public final ArrayList<AbstractArrowActor> arrowList = new ArrayList<AbstractArrowActor>();
-    public final ArrayList<AbstractArrowActor> removingArrowList = new ArrayList<AbstractArrowActor>();
+    private AbstractPlayerActor player;
+    private final ArrayList<AbstractArrowActor> arrowList = new ArrayList<>();
+    private final ArrayList<AbstractArrowActor> removingArrowList = new ArrayList<>();
 
     public void update() {
         player.update();
@@ -47,5 +47,29 @@ public class ActorGroup {
         for (AbstractArrowActor eachArrow : arrowList) {
             eachArrow.display();
         }
+    }
+
+    public ActorGroup getEnemyGroup() {
+        return enemyGroup;
+    }
+
+    public void setEnemyGroup(ActorGroup enemyGroup) {
+        this.enemyGroup = enemyGroup;
+    }
+
+    public AbstractPlayerActor getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(AbstractPlayerActor player) {
+        this.player = player;
+    }
+
+    public ArrayList<AbstractArrowActor> getArrowList() {
+        return arrowList;
+    }
+
+    public ArrayList<AbstractArrowActor> getRemovingArrowList() {
+        return removingArrowList;
     }
 }

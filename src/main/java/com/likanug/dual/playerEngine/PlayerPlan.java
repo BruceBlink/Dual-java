@@ -8,8 +8,8 @@ public abstract class PlayerPlan {
 
     protected App app;
 
-    abstract void execute(PlayerActor player, AbstractInputDevice input);
+    protected abstract void execute(PlayerActor player, AbstractInputDevice input);
 
-    abstract PlayerPlan nextPlan(PlayerActor player);
+    protected abstract PlayerPlan nextPlan(PlayerActor player);
 
 }

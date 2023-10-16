@@ -12,23 +12,23 @@ import static processing.core.PApplet.*;
 
 public class DrawLongbowPlayerActorState extends DrawBowPlayerActorState {
 
-    final float unitAngleSpeed = (float) (0.1 * TWO_PI / FPS);
-    final int chargeRequiredFrameCount = (int) (0.5 * FPS);
-    final int effectColor = app.color(192, 64, 64);
-    final int ringSize = 80;
-    final float ringStrokeWeight = 5;
+    private final float unitAngleSpeed = 0.1F * TWO_PI / FPS;
+    private final int chargeRequiredFrameCount = (int) (0.5 * FPS);
+    private final int effectColor = app.color(192, 64, 64);
+    private final int ringSize = 80;
+    private final float ringStrokeWeight = 5;
 
     public DrawLongbowPlayerActorState(App app) {
         super(app);
     }
 
     public PlayerActorState entryState(PlayerActor parentActor) {
-        parentActor.chargedFrameCount = 0;
+        parentActor.setChargedFrameCount(0);
         return this;
     }
 
     public void aim(PlayerActor parentActor, AbstractInputDevice input) {
-        parentActor.aimAngle += input.horizontalMoveButton * unitAngleSpeed;
+        parentActor.setAimAngle(parentActor.getAimAngle() + input.getHorizontalMoveButton() * unitAngleSpeed);
     }
 
     public void fire(PlayerActor parentActor) {
@@ -36,75 +36,74 @@ public class DrawLongbowPlayerActorState extends DrawBowPlayerActorState {
         final int arrowShaftNumber = 5;
         for (int i = 0; i < arrowShaftNumber; i++) {
             LongbowArrowShaft newArrow = new LongbowArrowShaft(app);
-            newArrow.xPosition = parentActor.xPosition + i * arrowComponentInterval * cos(parentActor.aimAngle);
-            newArrow.yPosition = parentActor.yPosition + i * arrowComponentInterval * sin(parentActor.aimAngle);
-            newArrow.rotationAngle = parentActor.aimAngle;
-            newArrow.setVelocity(parentActor.aimAngle, 64);
+            newArrow.setxPosition(parentActor.getxPosition() + i * arrowComponentInterval * cos(parentActor.getAimAngle()));
+            newArrow.setyPosition(parentActor.getyPosition() + i * arrowComponentInterval * sin(parentActor.getAimAngle()));
+            newArrow.setRotationAngle(parentActor.getAimAngle());
+            newArrow.setVelocity(parentActor.getAimAngle(), 64);
 
-            parentActor.group.addArrow(newArrow);
+            parentActor.getGroup().addArrow(newArrow);
         }
 
         LongbowArrowHead newArrow = new LongbowArrowHead(app);
-        newArrow.xPosition = parentActor.xPosition + arrowShaftNumber * arrowComponentInterval * cos(parentActor.aimAngle);
-        newArrow.yPosition = parentActor.yPosition + arrowShaftNumber * arrowComponentInterval * sin(parentActor.aimAngle);
-        newArrow.rotationAngle = parentActor.aimAngle;
-        newArrow.setVelocity(parentActor.aimAngle, 64);
+        newArrow.setxPosition(parentActor.getxPosition() + arrowShaftNumber * arrowComponentInterval * cos(parentActor.getAimAngle()));
+        newArrow.setyPosition(parentActor.getyPosition() + arrowShaftNumber * arrowComponentInterval * sin(parentActor.getAimAngle()));
+        newArrow.setRotationAngle(parentActor.getAimAngle());
+        newArrow.setVelocity(parentActor.getAimAngle(), 64);
 
-        final Particle newParticle = app.system.commonParticleSet.builder
+        final Particle newParticle = app.system.commonParticleSet.getBuilder()
                 .type(2)  // Line
-                .position(parentActor.xPosition, parentActor.yPosition)
+                .position(parentActor.getxPosition(), parentActor.getyPosition())
                 .polarVelocity(0, 0)
-                .rotation(parentActor.aimAngle)
+                .rotation(parentActor.getAimAngle())
                 .particleColor(app.color(192, 64, 64))
                 .lifespanSecond(2)
                 .weight(16)
                 .build();
-        app.system.commonParticleSet.particleList.add(newParticle);
+        app.system.commonParticleSet.getParticleList().add(newParticle);
 
-        parentActor.group.addArrow(newArrow);
+        parentActor.getGroup().addArrow(newArrow);
 
         app.system.screenShakeValue += 10;
 
-        parentActor.chargedFrameCount = 0;
-        parentActor.state = moveState.entryState(parentActor);
+        parentActor.setChargedFrameCount(0);
+        parentActor.setState(moveState.entryState(parentActor));
     }
 
     public void displayEffect(PlayerActor parentActor) {
         app.noFill();
         app.stroke(0);
-        app.arc(0, 0, 100, 100, parentActor.aimAngle - QUARTER_PI, parentActor.aimAngle + QUARTER_PI);
+        app.arc(0, 0, 100, 100, parentActor.getAimAngle() - QUARTER_PI, parentActor.getAimAngle() + QUARTER_PI);
 
         if (hasCompletedLongBowCharge(parentActor))
             app.stroke(effectColor);
         else
             app.stroke(0, 128);
 
-        app.line(0, 0, 800 * cos(parentActor.aimAngle), 800 * sin(parentActor.aimAngle));
+        app.line(0, 0, 800 * cos(parentActor.getAimAngle()), 800 * sin(parentActor.getAimAngle()));
 
         app.rotate(-HALF_PI);
         app.strokeWeight(ringStrokeWeight);
-        app.arc(0, 0, ringSize, ringSize, 0, TWO_PI * min((int) 1.0, parentActor.chargedFrameCount / chargeRequiredFrameCount));
+        app.arc(0, 0, ringSize, ringSize, 0, TWO_PI * min((int) 1.0, parentActor.getChargedFrameCount() / chargeRequiredFrameCount));
         app.strokeWeight(1);
         app.rotate(+HALF_PI);
-
-        parentActor.chargedFrameCount++;
+        parentActor.setChargedFrameCount(parentActor.getChargedFrameCount() + 1);
     }
 
     public void act(PlayerActor parentActor) {
         super.act(parentActor);
 
-        if (parentActor.chargedFrameCount != chargeRequiredFrameCount) return;
+        if (parentActor.getChargedFrameCount() != chargeRequiredFrameCount) return;
 
-        final Particle newParticle = app.system.commonParticleSet.builder
+        final Particle newParticle = app.system.commonParticleSet.getBuilder()
                 .type(3)  // Ring
-                .position(parentActor.xPosition, parentActor.yPosition)
+                .position(parentActor.getxPosition(), parentActor.getyPosition())
                 .polarVelocity(0, 0)
                 .particleSize(ringSize)
                 .particleColor(effectColor)
                 .weight(ringStrokeWeight)
                 .lifespanSecond(0)
                 .build();
-        app.system.commonParticleSet.particleList.add(newParticle);
+        app.system.commonParticleSet.getParticleList().add(newParticle);
     }
 
     public boolean isDrawingLongBow() {
@@ -112,15 +111,15 @@ public class DrawLongbowPlayerActorState extends DrawBowPlayerActorState {
     }
 
     public boolean hasCompletedLongBowCharge(PlayerActor parentActor) {
-        return parentActor.chargedFrameCount >= chargeRequiredFrameCount;
+        return parentActor.getChargedFrameCount() >= chargeRequiredFrameCount;
     }
 
     public boolean buttonPressed(AbstractInputDevice input) {
-        return input.longShotButtonPressed;
+        return input.isLongShotButtonPressed();
     }
 
     public boolean triggerPulled(PlayerActor parentActor) {
-        return !buttonPressed(parentActor.engine.controllingInputDevice) && hasCompletedLongBowCharge(parentActor);
+        return !buttonPressed(parentActor.getEngine().getControllingInputDevice()) && hasCompletedLongBowCharge(parentActor);
     }
 
 }

@@ -6,31 +6,38 @@ import com.likanug.dual.inputDevice.AbstractInputDevice;
 
 public abstract class DrawBowPlayerActorState extends PlayerActorState {
 
-    public PlayerActorState moveState;
+    protected PlayerActorState moveState;
 
     public DrawBowPlayerActorState(App app) {
         super(app);
     }
 
     public void act(PlayerActor parentActor) {
-        final AbstractInputDevice input = parentActor.engine.controllingInputDevice;
+        final AbstractInputDevice input = parentActor.getEngine().getControllingInputDevice();
         aim(parentActor, input);
 
-        parentActor.addVelocity((float) (0.25 * input.horizontalMoveButton), (float) (0.25 * input.verticalMoveButton));
+        parentActor.addVelocity((float) (0.25 * input.getHorizontalMoveButton()), (float) (0.25 * input.getVerticalMoveButton()));
 
         if (triggerPulled(parentActor)) fire(parentActor);
 
         if (!buttonPressed(input)) {
-            parentActor.state = moveState.entryState(parentActor);
+            parentActor.setState(moveState.entryState(parentActor));
         }
     }
 
-    abstract void aim(PlayerActor parentActor, AbstractInputDevice input);
+    protected abstract void aim(PlayerActor parentActor, AbstractInputDevice input);
 
-    abstract void fire(PlayerActor parentActor);
+    protected abstract void fire(PlayerActor parentActor);
 
-    abstract boolean buttonPressed(AbstractInputDevice input);
+    protected abstract boolean buttonPressed(AbstractInputDevice input);
 
-    abstract boolean triggerPulled(PlayerActor parentActor);
+    protected abstract boolean triggerPulled(PlayerActor parentActor);
 
+    public PlayerActorState getMoveState() {
+        return moveState;
+    }
+
+    public void setMoveState(PlayerActorState moveState) {
+        this.moveState = moveState;
+    }
 }

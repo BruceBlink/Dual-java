@@ -6,7 +6,7 @@ import static com.likanug.dual.App.INTERNAL_CANVAS_SIDE_LENGTH;
 
 public abstract class AbstractArrowActor extends Actor {
 
-    public final float halfLength;
+    protected final float halfLength;
 
     public AbstractArrowActor(float _collisionRadius, float _halfLength, App app) {
         super(_collisionRadius, app);
@@ -21,7 +21,7 @@ public abstract class AbstractArrowActor extends Actor {
                         yPosition < -halfLength ||
                         yPosition > INTERNAL_CANVAS_SIDE_LENGTH + halfLength
         ) {
-            group.removingArrowList.add(this);
+            group.getRemovingArrowList().add(this);
         }
     }
 

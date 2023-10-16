@@ -8,24 +8,24 @@ import static com.likanug.dual.App.FPS;
 public class ParticleBuilder {
 
     private final App app;
-    int particleTypeNumber;
+    private int particleTypeNumber;
 
-    float xPosition, yPosition;
-    float xVelocity, yVelocity;
-    float directionAngle, speed;
+    private float xPosition, yPosition;
+    private float xVelocity, yVelocity;
+    private float directionAngle, speed;
 
-    float rotationAngle;
-    int displayColor;
-    float strokeWeightValue;
-    int displaySize;
+    private float rotationAngle;
+    private int displayColor;
+    private float strokeWeightValue;
+    private int displaySize;
 
-    int lifespanFrameCount;
+    private int lifespanFrameCount;
 
     public ParticleBuilder(App app) {
         this.app = app;
     }
 
-    ParticleBuilder initialize() {
+    public ParticleBuilder initialize() {
         particleTypeNumber = 0;
         xPosition = 0;
         yPosition = 0;
@@ -80,7 +80,7 @@ public class ParticleBuilder {
         return this;
     }
 
-    ParticleBuilder lifespan(int v) {
+    public ParticleBuilder lifespan(int v) {
         lifespanFrameCount = v;
         return this;
     }
@@ -92,18 +92,18 @@ public class ParticleBuilder {
 
     public Particle build() {
         final Particle newParticle = app.system.commonParticleSet.allocate();
-        newParticle.particleTypeNumber = this.particleTypeNumber;
-        newParticle.xPosition = this.xPosition;
-        newParticle.yPosition = this.yPosition;
-        newParticle.xVelocity = this.xVelocity;
-        newParticle.yVelocity = this.yVelocity;
-        newParticle.directionAngle = this.directionAngle;
-        newParticle.speed = this.speed;
-        newParticle.rotationAngle = this.rotationAngle;
-        newParticle.displayColor = this.displayColor;
-        newParticle.strokeWeightValue = this.strokeWeightValue;
-        newParticle.displaySize = this.displaySize;
-        newParticle.lifespanFrameCount = this.lifespanFrameCount;
+        newParticle.setParticleTypeNumber(this.particleTypeNumber);
+        newParticle.setxPosition(this.xPosition);
+        newParticle.setyPosition(this.yPosition);
+        newParticle.setxVelocity(this.xVelocity);
+        newParticle.setyVelocity(this.yVelocity);
+        newParticle.setDirectionAngle(this.directionAngle);
+        newParticle.setSpeed(this.speed);
+        newParticle.setRotationAngle(this.rotationAngle);
+        newParticle.setDisplayColor(this.displayColor);
+        newParticle.setStrokeWeightValue(this.strokeWeightValue);
+        newParticle.setDisplaySize(this.displaySize);
+        newParticle.setLifespanFrameCount(this.lifespanFrameCount);
         return newParticle;
     }
 

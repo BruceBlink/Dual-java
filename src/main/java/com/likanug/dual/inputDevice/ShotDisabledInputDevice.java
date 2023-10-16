@@ -1,6 +1,6 @@
 package com.likanug.dual.inputDevice;
 
-public class ShotDisabledInputDevice extends AbstractInputDevice {
+public class ShotDisabledInputDevice extends InputDevice {
 
     public void operateShotButton(boolean pressed) {
     }

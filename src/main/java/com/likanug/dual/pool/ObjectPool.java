@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import static processing.core.PApplet.println;
 
 public class ObjectPool<T extends Poolable<T>> {
-    public final int poolSize;
-    public final ArrayList<T> pool;
-    public int index = 0;
-    public final ArrayList<T> temporalInstanceList;
-    public int temporalInstanceCount = 0;
-    public int allocationCount = 0;
+    private final int poolSize;
+    private final ArrayList<T> pool;
+    private int index = 0;
+    private final ArrayList<T> temporalInstanceList;
+    private int temporalInstanceCount = 0;
+    private int allocationCount = 0;
 
     public ObjectPool(int pSize) {
         poolSize = pSize;
@@ -18,8 +18,44 @@ public class ObjectPool<T extends Poolable<T>> {
         temporalInstanceList = new ArrayList<T>(pSize);
     }
 
-    ObjectPool() {
+    public ObjectPool() {
         this(256);
+    }
+
+    public int getPoolSize() {
+        return poolSize;
+    }
+
+    public ArrayList<T> getPool() {
+        return pool;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public ArrayList<T> getTemporalInstanceList() {
+        return temporalInstanceList;
+    }
+
+    public int getTemporalInstanceCount() {
+        return temporalInstanceCount;
+    }
+
+    public void setTemporalInstanceCount(int temporalInstanceCount) {
+        this.temporalInstanceCount = temporalInstanceCount;
+    }
+
+    public int getAllocationCount() {
+        return allocationCount;
+    }
+
+    public void setAllocationCount(int allocationCount) {
+        this.allocationCount = allocationCount;
     }
 
     public T allocate() {

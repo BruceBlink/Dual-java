@@ -3,9 +3,9 @@ package com.likanug.dual.game;
 import com.likanug.dual.App;
 
 public abstract class BackgroundLine {
-    public App app;
-    public float position;
-    public float velocity;
+    protected App app;
+    protected float position;
+    protected float velocity;
 
     public BackgroundLine(App app, float initialPosition) {
         this.app = app;
