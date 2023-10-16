@@ -1,17 +1,21 @@
 package com.likanug.dual;
 
+import com.likanug.dual.game.GameSystem;
+import com.likanug.dual.inputDevice.KeyInput;
 import processing.core.PApplet;
 import processing.core.PFont;
 
 public class App extends PApplet {
 
 
-    public static int WIDTH = 640;
-    public static int HEIGHT = 640;
-
     public static final int FPS = 60;
+    public static final int INTERNAL_CANVAS_SIDE_LENGTH = 640;
+    public static PFont smallFont, largeFont;
 
-    PFont smallFont, largeFont;
+    public KeyInput currentKeyInput;
+    public GameSystem system;
+
+    public boolean paused;
 
     public static void main(String[] args) {
         PApplet.main("com.likanug.dual.App");
@@ -19,7 +23,7 @@ public class App extends PApplet {
 
     @Override
     public void settings() {
-        size(WIDTH, HEIGHT);
+        size(INTERNAL_CANVAS_SIDE_LENGTH, INTERNAL_CANVAS_SIDE_LENGTH);
     }
 
 
@@ -37,9 +41,13 @@ public class App extends PApplet {
         textAlign(CENTER, CENTER);
         rectMode(CENTER);
         ellipseMode(CENTER);
+        currentKeyInput = new KeyInput();
+        newGame(true, true);
     }
 
-
+    public void newGame(boolean demo, boolean instruction) {
+        system = new GameSystem(demo, instruction, this);
+    }
     @Override
     public void draw() {
 
@@ -47,7 +55,7 @@ public class App extends PApplet {
 
     @Override
     public void mousePressed() {
-        super.mousePressed();
+        system.showsInstructionWindow = !system.showsInstructionWindow;
     }
 
     @Override
@@ -57,6 +65,49 @@ public class App extends PApplet {
 
     @Override
     public void keyPressed() {
-        super.keyPressed();
+        if (key != CODED) {
+            if (key == 'z' || key == 'Z') {
+                currentKeyInput.isZPressed = true;
+                return;
+            }
+            if (key == 'x' || key == 'X') {
+                currentKeyInput.isXPressed = true;
+                return;
+            }
+            if (key == 'p') {
+                if (paused) loop();
+                else noLoop();
+                paused = !paused;
+            }
+            return;
+        }
+        switch (keyCode) {
+            case UP -> currentKeyInput.isUpPressed = true;
+            case DOWN -> currentKeyInput.isDownPressed = true;
+            case LEFT -> currentKeyInput.isLeftPressed = true;
+            case RIGHT -> currentKeyInput.isRightPressed = true;
+        }
     }
+
+    @Override
+    public void keyReleased() {
+        if (key != CODED) {
+            if (key == 'z' || key == 'Z') {
+                currentKeyInput.isZPressed = false;
+                return;
+            }
+            if (key == 'x' || key == 'X') {
+                currentKeyInput.isXPressed = false;
+                return;
+            }
+            return;
+        }
+        switch (keyCode) {
+            case UP -> currentKeyInput.isUpPressed = false;
+            case DOWN -> currentKeyInput.isDownPressed = false;
+            case LEFT -> currentKeyInput.isLeftPressed = false;
+            case RIGHT -> currentKeyInput.isRightPressed = false;
+        }
+    }
+
 }
