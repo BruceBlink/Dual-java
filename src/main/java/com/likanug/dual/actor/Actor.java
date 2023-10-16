@@ -1,22 +1,22 @@
 package com.likanug.dual.actor;
 
 import com.likanug.dual.App;
-import com.likanug.dual.body.Body;
+import com.likanug.dual.common.GameObject;
 
-public abstract class Actor extends Body {
+public abstract class Actor extends GameObject {
 
     public ActorGroup group;
     public float rotationAngle;
     protected final float collisionRadius;
 
-    Actor(float _collisionRadius, App app) {
+    protected Actor(float _collisionRadius, App app) {
         this.app = app;
         collisionRadius = _collisionRadius;
     }
 
-    abstract void act();
+    protected abstract void act();
 
-    public boolean isCollided(Actor other) {
-        return getDistance(other) < this.collisionRadius + other.collisionRadius;
+    public boolean isNotCollided(Actor other) {
+        return !(getDistance(other) < this.collisionRadius + other.collisionRadius);
     }
 }

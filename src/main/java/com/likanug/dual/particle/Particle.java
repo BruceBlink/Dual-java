@@ -1,7 +1,7 @@
 package com.likanug.dual.particle;
 
 import com.likanug.dual.App;
-import com.likanug.dual.body.Body;
+import com.likanug.dual.common.GameObject;
 import com.likanug.dual.pool.ObjectPool;
 import com.likanug.dual.pool.Poolable;
 import processing.core.PApplet;
@@ -11,7 +11,7 @@ import static processing.core.PApplet.cos;
 import static processing.core.PApplet.sin;
 import static processing.core.PConstants.TWO_PI;
 
-public class Particle extends Body implements Poolable<Particle> {
+public class Particle extends GameObject implements Poolable<Particle> {
 
     boolean allocatedIndicator;
     ObjectPool<Particle> belongingPool;

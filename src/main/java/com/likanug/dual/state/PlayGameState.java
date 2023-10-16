@@ -51,7 +51,7 @@ public class PlayGameState extends GameSystemState {
 
         for (AbstractArrowActor eachMyArrow : myGroup.arrowList) {
             for (AbstractArrowActor eachEnemyArrow : otherGroup.arrowList) {
-                if (!eachMyArrow.isCollided(eachEnemyArrow)) continue;
+                if (eachMyArrow.isNotCollided(eachEnemyArrow)) continue;
                 breakArrow(eachMyArrow, myGroup);
                 breakArrow(eachEnemyArrow, otherGroup);
             }
@@ -61,7 +61,7 @@ public class PlayGameState extends GameSystemState {
             for (AbstractArrowActor eachMyArrow : myGroup.arrowList) {
 
                 AbstractPlayerActor enemyPlayer = otherGroup.player;
-                if (!eachMyArrow.isCollided(enemyPlayer)) continue;
+                if (eachMyArrow.isNotCollided(enemyPlayer)) continue;
 
                 if (eachMyArrow.isLethal()) killPlayer(otherGroup.player);
                 else thrustPlayerActor(eachMyArrow, (PlayerActor) enemyPlayer);
@@ -72,7 +72,7 @@ public class PlayGameState extends GameSystemState {
 
         if (!myGroup.player.isNull()) {
             for (AbstractArrowActor eachEnemyArrow : otherGroup.arrowList) {
-                if (!eachEnemyArrow.isCollided(myGroup.player)) continue;
+                if (eachEnemyArrow.isNotCollided(myGroup.player)) continue;
 
                 if (eachEnemyArrow.isLethal()) killPlayer(myGroup.player);
                 else thrustPlayerActor(eachEnemyArrow, (PlayerActor) myGroup.player);

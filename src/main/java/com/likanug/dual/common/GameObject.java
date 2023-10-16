@@ -1,10 +1,10 @@
-package com.likanug.dual.body;
+package com.likanug.dual.common;
 
 import com.likanug.dual.App;
 
 import static processing.core.PApplet.*;
 
-public abstract class Body {
+public abstract class GameObject extends AbstractGameObject {
     protected App app;
     public float xPosition;
     public float yPosition;
@@ -27,15 +27,15 @@ public abstract class Body {
         yVelocity = speed * sin(dir);
     }
 
-    public float getDistance(Body other) {
+    public float getDistance(GameObject other) {
         return dist(this.xPosition, this.yPosition, other.xPosition, other.yPosition);
     }
 
-    public float getDistancePow2(Body other) {
+    public float getDistancePow2(GameObject other) {
         return sq(other.xPosition - this.xPosition) + sq(other.yPosition - this.yPosition);
     }
 
-    public float getAngle(Body other) {
+    public float getAngle(GameObject other) {
         return atan2(other.yPosition - this.yPosition, other.xPosition - this.xPosition);
     }
 }
