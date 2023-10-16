@@ -6,20 +6,20 @@ import java.util.ArrayList;
 
 public class GameBackground {
 
-    App app;
-    final ArrayList<BackgroundLine> lineList = new ArrayList<>();
-    final float maxAccelerationMagnitude;
-    final float lineColor;
+    private final App app;
+    private final ArrayList<BackgroundLine> lineList = new ArrayList<>();
+    private final float maxAccelerationMagnitude;
+    private final float lineColor;
 
     GameBackground(float col, float maxAcc, App app) {
-
+        this.app = app;
         lineColor = col;
         maxAccelerationMagnitude = maxAcc;
         for (int i = 0; i < 10; i++) {
             lineList.add(new HorizontalLine(app));
         }
         for (int i = 0; i < 10; i++) {
-            lineList.add(new VerticalLine());
+            lineList.add(new VerticalLine(app));
         }
     }
 

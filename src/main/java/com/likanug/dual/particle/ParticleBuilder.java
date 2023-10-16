@@ -7,7 +7,7 @@ import static com.likanug.dual.App.FPS;
 
 public class ParticleBuilder {
 
-    public App app;
+    private final App app;
     int particleTypeNumber;
 
     float xPosition, yPosition;
@@ -20,6 +20,10 @@ public class ParticleBuilder {
     int displaySize;
 
     int lifespanFrameCount;
+
+    public ParticleBuilder(App app) {
+        this.app = app;
+    }
 
     ParticleBuilder initialize() {
         particleTypeNumber = 0;

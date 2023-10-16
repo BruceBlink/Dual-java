@@ -63,7 +63,7 @@ public class GameSystem {
         this.otherGroup.setPlayer(otherPlayer);
 
         // other
-        this.commonParticleSet = new ParticleSet(2048);
+        this.commonParticleSet = new ParticleSet(2048, app);
         this.currentState = new StartGameState(app);
         this.currentBackground = new GameBackground(224, 0.1F, app);
         this.demoPlay = demo;

@@ -1,11 +1,13 @@
 package com.likanug.dual.game;
 
+import com.likanug.dual.App;
+
 import static com.likanug.dual.App.INTERNAL_CANVAS_SIDE_LENGTH;
 
 public class VerticalLine extends BackgroundLine {
 
-    public VerticalLine() {
-        super();
+    public VerticalLine(App app) {
+        super(app, app.random(INTERNAL_CANVAS_SIDE_LENGTH));
         //super(app, app.random(INTERNAL_CANVAS_SIDE_LENGTH));
     }
 

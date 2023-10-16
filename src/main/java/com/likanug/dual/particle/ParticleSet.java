@@ -1,5 +1,6 @@
 package com.likanug.dual.particle;
 
+import com.likanug.dual.App;
 import com.likanug.dual.pool.ObjectPool;
 
 import java.util.ArrayList;
@@ -11,15 +12,16 @@ public class ParticleSet {
     public final ObjectPool<Particle> particlePool;
     public final ParticleBuilder builder;
 
-    public ParticleSet(int capacity) {
-        particlePool = new ObjectPool<Particle>(capacity);
+
+    public ParticleSet(int capacity, App app) {
+        particlePool = new ObjectPool<>(capacity);
         for (int i = 0; i < capacity; i++) {
-            particlePool.pool.add(new Particle());
+            particlePool.pool.add(new Particle(app));
         }
 
-        particleList = new ArrayList<Particle>(capacity);
-        removingParticleList = new ArrayList<Particle>(capacity);
-        builder = new ParticleBuilder();
+        particleList = new ArrayList<>(capacity);
+        removingParticleList = new ArrayList<>(capacity);
+        builder = new ParticleBuilder(app);
     }
 
     public void update() {

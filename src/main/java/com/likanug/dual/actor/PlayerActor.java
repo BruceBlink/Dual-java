@@ -29,7 +29,7 @@ public class PlayerActor extends AbstractPlayerActor {
         yVelocity = constrain(yVelocity + yAcceleration, -7, 7);
     }
 
-    void act() {
+    public void act() {
         engine.run(this);
         state.act(this);
     }

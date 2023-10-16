@@ -1,5 +1,6 @@
 package com.likanug.dual.particle;
 
+import com.likanug.dual.App;
 import com.likanug.dual.body.Body;
 import com.likanug.dual.pool.ObjectPool;
 import com.likanug.dual.pool.Poolable;
@@ -24,6 +25,10 @@ public class Particle extends Body implements Poolable {
     int lifespanFrameCount;
     int properFrameCount;
     int particleTypeNumber;
+
+    public Particle(App app) {
+        this.app = app;
+    }
 
     // override methods of Poolable
     public boolean isAllocated() {

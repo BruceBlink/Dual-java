@@ -1,5 +1,6 @@
 package com.likanug.dual.playerEngine;
 
+import com.likanug.dual.App;
 import com.likanug.dual.actor.AbstractPlayerActor;
 import com.likanug.dual.actor.PlayerActor;
 import com.likanug.dual.inputDevice.AbstractInputDevice;
@@ -11,6 +12,10 @@ import static processing.core.PConstants.*;
 public class KillPlayerPlan extends PlayerPlan {
 
     PlayerPlan movePlan, escapePlan;
+
+    public KillPlayerPlan(App app) {
+        this.app = app;
+    }
 
     void execute(PlayerActor player, AbstractInputDevice input) {
         int horizontalMove;

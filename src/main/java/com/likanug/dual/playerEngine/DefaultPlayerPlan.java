@@ -1,5 +1,6 @@
 package com.likanug.dual.playerEngine;
 
+import com.likanug.dual.App;
 import com.likanug.dual.actor.AbstractArrowActor;
 import com.likanug.dual.actor.AbstractPlayerActor;
 import com.likanug.dual.actor.PlayerActor;
@@ -15,6 +16,10 @@ public class DefaultPlayerPlan extends PlayerPlan {
     public PlayerPlan movePlan, jabPlan, escapePlan, killPlan;
     public int horizontalMove, verticalMove;
     public boolean shoot;
+
+    public DefaultPlayerPlan(App app) {
+        this.app = app;
+    }
 
     public void execute(PlayerActor player, AbstractInputDevice input) {
         input.operateMoveButton(horizontalMove, verticalMove);

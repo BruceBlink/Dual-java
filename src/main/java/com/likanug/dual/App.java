@@ -50,7 +50,8 @@ public class App extends PApplet {
     }
     @Override
     public void draw() {
-
+        background(255);
+        system.run();
     }
 
     @Override
