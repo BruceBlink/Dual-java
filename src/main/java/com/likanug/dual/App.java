@@ -19,7 +19,7 @@ public class App extends PApplet {
     private boolean paused;
 
     public static void main(String[] args) {
-        PApplet.main("com.likanug.dual.App");
+        App.main("com.likanug.dual.App");
     }
 
     @Override
