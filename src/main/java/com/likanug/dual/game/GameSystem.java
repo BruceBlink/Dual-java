@@ -2,7 +2,7 @@ package com.likanug.dual.game;
 
 import com.likanug.dual.App;
 import com.likanug.dual.actor.ActorGroup;
-import com.likanug.dual.actor.PlayerActor;
+import com.likanug.dual.actor.player.PlayerActor;
 import com.likanug.dual.particle.Particle;
 import com.likanug.dual.particle.ParticleBuilder;
 import com.likanug.dual.particle.ParticleSet;
@@ -17,15 +17,15 @@ import static processing.core.PConstants.*;
 
 public class GameSystem {
     private final App app;
-    public final ActorGroup myGroup;
-    public final ActorGroup otherGroup;
-    public final ParticleSet commonParticleSet;
-    public GameSystemState currentState;
-    public float screenShakeValue;
-    public final DamagedPlayerActorState damagedState;
-    public final GameBackground currentBackground;
-    public final boolean demoPlay;
-    public boolean showsInstructionWindow;
+    private final ActorGroup myGroup;
+    private final ActorGroup otherGroup;
+    private final ParticleSet commonParticleSet;
+    private GameSystemState currentState;
+    private float screenShakeValue;
+    private final DamagedPlayerActorState damagedState;
+    private final GameBackground currentBackground;
+    private final boolean demoPlay;
+    private boolean showsInstructionWindow;
 
     public GameSystem(boolean demo, boolean instruction, App app) {
         this.app = app;
@@ -49,7 +49,7 @@ public class GameSystem {
         // prepare PlayerActor
         PlayerEngine myEngine;
         if (demo) myEngine = new ComputerPlayerEngine(app);
-        else myEngine = new HumanPlayerEngine(app.currentKeyInput);
+        else myEngine = new HumanPlayerEngine(app.getCurrentKeyInput());
         PlayerActor myPlayer = new PlayerActor(myEngine, 255, app);
         myPlayer.setxPosition(INTERNAL_CANVAS_SIDE_LENGTH * 0.5F);
         myPlayer.setyPosition(INTERNAL_CANVAS_SIDE_LENGTH - 100);
@@ -74,10 +74,58 @@ public class GameSystem {
         this(false, false, app);
     }
 
+    public ActorGroup getMyGroup() {
+        return myGroup;
+    }
+
+    public ActorGroup getOtherGroup() {
+        return otherGroup;
+    }
+
+    public ParticleSet getCommonParticleSet() {
+        return commonParticleSet;
+    }
+
+    public GameSystemState getCurrentState() {
+        return currentState;
+    }
+
+    public void setCurrentState(GameSystemState currentState) {
+        this.currentState = currentState;
+    }
+
+    public float getScreenShakeValue() {
+        return screenShakeValue;
+    }
+
+    public void setScreenShakeValue(float screenShakeValue) {
+        this.screenShakeValue = screenShakeValue;
+    }
+
+    public DamagedPlayerActorState getDamagedState() {
+        return damagedState;
+    }
+
+    public GameBackground getCurrentBackground() {
+        return currentBackground;
+    }
+
+    public boolean isDemoPlay() {
+        return demoPlay;
+    }
+
+    public boolean isShowsInstructionWindow() {
+        return showsInstructionWindow;
+    }
+
+    public void setShowsInstructionWindow(boolean showsInstructionWindow) {
+        this.showsInstructionWindow = showsInstructionWindow;
+    }
+
     public void run() {
         if (demoPlay) {
-            if (app.currentKeyInput.isZPressed) {
-                app.system = new GameSystem(app);  // stop demo and start game
+            if (app.getCurrentKeyInput().isZPressed) {
+                app.setSystem(new GameSystem(app));  // stop demo and start game
                 return;
             }
         }
@@ -130,7 +178,7 @@ public class GameSystem {
     }
 
     public void addSquareParticles(float x, float y, int particleCount, int particleSize, float minSpeed, float maxSpeed, int lifespanSecondValue) {
-        final ParticleBuilder builder = app.system.commonParticleSet.getBuilder()
+        final ParticleBuilder builder = app.getSystem().commonParticleSet.getBuilder()
                 .type(1)  // Square
                 .position(x, y)
                 .particleSize(particleSize)
@@ -140,7 +188,7 @@ public class GameSystem {
             final Particle newParticle = builder
                     .polarVelocity(app.random(TWO_PI), app.random(minSpeed, maxSpeed))
                     .build();
-            app.system.commonParticleSet.getParticleList().add(newParticle);
+            app.getSystem().commonParticleSet.getParticleList().add(newParticle);
         }
     }
 }

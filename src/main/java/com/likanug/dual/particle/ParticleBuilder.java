@@ -91,7 +91,7 @@ public class ParticleBuilder {
     }
 
     public Particle build() {
-        final Particle newParticle = app.system.commonParticleSet.allocate();
+        final Particle newParticle = app.getSystem().getCommonParticleSet().allocate();
         newParticle.setParticleTypeNumber(this.particleTypeNumber);
         newParticle.setxPosition(this.xPosition);
         newParticle.setyPosition(this.yPosition);

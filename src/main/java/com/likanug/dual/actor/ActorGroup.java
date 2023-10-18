@@ -1,5 +1,9 @@
 package com.likanug.dual.actor;
 
+import com.likanug.dual.actor.arrow.AbstractArrowActor;
+import com.likanug.dual.actor.player.AbstractPlayerActor;
+import com.likanug.dual.actor.player.PlayerActor;
+
 import java.util.ArrayList;
 
 public class ActorGroup {

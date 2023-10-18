@@ -1,6 +1,7 @@
-package com.likanug.dual.actor;
+package com.likanug.dual.actor.arrow;
 
 import com.likanug.dual.App;
+import com.likanug.dual.actor.Actor;
 
 import static com.likanug.dual.App.INTERNAL_CANVAS_SIDE_LENGTH;
 

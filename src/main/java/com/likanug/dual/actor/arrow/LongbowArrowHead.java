@@ -1,4 +1,4 @@
-package com.likanug.dual.actor;
+package com.likanug.dual.actor.arrow;
 
 import com.likanug.dual.App;
 

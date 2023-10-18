@@ -82,7 +82,7 @@ public class Particle extends GameObject implements Poolable<Particle> {
 
         properFrameCount++;
         if (properFrameCount > lifespanFrameCount)
-            app.system.commonParticleSet.getRemovingParticleList().add(this);
+            app.getSystem().getCommonParticleSet().getRemovingParticleList().add(this);
 
         if (particleTypeNumber == 1) {    // Square
             rotationAngle += 1.5F * TWO_PI / FPS;

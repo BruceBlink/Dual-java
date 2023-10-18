@@ -1,4 +1,4 @@
-package com.likanug.dual.actor;
+package com.likanug.dual.actor.arrow;
 
 import com.likanug.dual.App;
 import com.likanug.dual.particle.Particle;
@@ -36,7 +36,7 @@ public class ShortbowArrow extends AbstractArrowActor {
         final float particleDirectionAngle = this.directionAngle + PI + app.random(-QUARTER_PI, QUARTER_PI);
         for (int i = 0; i < 3; i++) {
             final float particleSpeed = app.random(0.5F, 2.0F);
-            final Particle newParticle = app.system.commonParticleSet.getBuilder()
+            final Particle newParticle = app.system.getCommonParticleSet().getBuilder()
                     .type(1)  // Square
                     .position(this.xPosition, this.yPosition)
                     .polarVelocity(particleDirectionAngle, particleSpeed)
@@ -44,7 +44,7 @@ public class ShortbowArrow extends AbstractArrowActor {
                     .particleColor(app.color(192))
                     .lifespanSecond((int) 0.5)
                     .build();
-            app.system.commonParticleSet.getParticleList().add(newParticle);
+            app.system.getCommonParticleSet().getParticleList().add(newParticle);
         }
     }
 

@@ -1,8 +1,8 @@
 package com.likanug.dual.playerEngine;
 
 import com.likanug.dual.App;
-import com.likanug.dual.actor.AbstractPlayerActor;
-import com.likanug.dual.actor.PlayerActor;
+import com.likanug.dual.actor.player.AbstractPlayerActor;
+import com.likanug.dual.actor.player.PlayerActor;
 import com.likanug.dual.inputDevice.AbstractInputDevice;
 
 import static processing.core.PApplet.abs;

@@ -1,9 +1,9 @@
 package com.likanug.dual.playerEngine;
 
 import com.likanug.dual.App;
-import com.likanug.dual.actor.AbstractArrowActor;
-import com.likanug.dual.actor.AbstractPlayerActor;
-import com.likanug.dual.actor.PlayerActor;
+import com.likanug.dual.actor.arrow.AbstractArrowActor;
+import com.likanug.dual.actor.player.AbstractPlayerActor;
+import com.likanug.dual.actor.player.PlayerActor;
 import com.likanug.dual.inputDevice.AbstractInputDevice;
 
 import static com.likanug.dual.App.INTERNAL_CANVAS_SIDE_LENGTH;

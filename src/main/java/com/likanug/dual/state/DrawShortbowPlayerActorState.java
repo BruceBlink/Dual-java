@@ -1,8 +1,8 @@
 package com.likanug.dual.state;
 
 import com.likanug.dual.App;
-import com.likanug.dual.actor.PlayerActor;
-import com.likanug.dual.actor.ShortbowArrow;
+import com.likanug.dual.actor.arrow.ShortbowArrow;
+import com.likanug.dual.actor.player.PlayerActor;
 import com.likanug.dual.inputDevice.AbstractInputDevice;
 
 import static com.likanug.dual.App.FPS;

@@ -1,6 +1,7 @@
-package com.likanug.dual.actor;
+package com.likanug.dual.actor.player;
 
 import com.likanug.dual.App;
+import com.likanug.dual.actor.Actor;
 import com.likanug.dual.playerEngine.PlayerEngine;
 import com.likanug.dual.state.PlayerActorState;
 

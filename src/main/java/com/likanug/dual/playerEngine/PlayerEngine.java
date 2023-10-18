@@ -1,6 +1,6 @@
 package com.likanug.dual.playerEngine;
 
-import com.likanug.dual.actor.PlayerActor;
+import com.likanug.dual.actor.player.PlayerActor;
 import com.likanug.dual.inputDevice.AbstractInputDevice;
 import com.likanug.dual.inputDevice.InputDevice;
 

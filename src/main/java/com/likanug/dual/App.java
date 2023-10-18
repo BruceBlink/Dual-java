@@ -12,9 +12,9 @@ public class App extends PApplet {
     public static final int INTERNAL_CANVAS_SIDE_LENGTH = 640;
     public static PFont smallFont, largeFont;
 
-    public KeyInput currentKeyInput;
+    private KeyInput currentKeyInput;
 
-    public GameSystem system;
+    private GameSystem system;
 
     private boolean paused;
 
@@ -57,7 +57,7 @@ public class App extends PApplet {
 
     @Override
     public void mousePressed() {
-        system.showsInstructionWindow = !system.showsInstructionWindow;
+        system.setShowsInstructionWindow(!system.isShowsInstructionWindow());
     }
 
     @Override
@@ -112,4 +112,28 @@ public class App extends PApplet {
         }
     }
 
+
+    public KeyInput getCurrentKeyInput() {
+        return currentKeyInput;
+    }
+
+    public void setCurrentKeyInput(KeyInput currentKeyInput) {
+        this.currentKeyInput = currentKeyInput;
+    }
+
+    public GameSystem getSystem() {
+        return system;
+    }
+
+    public void setSystem(GameSystem system) {
+        this.system = system;
+    }
+
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
+    }
 }

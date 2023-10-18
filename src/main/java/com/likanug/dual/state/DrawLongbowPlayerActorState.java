@@ -1,9 +1,9 @@
 package com.likanug.dual.state;
 
 import com.likanug.dual.App;
-import com.likanug.dual.actor.LongbowArrowHead;
-import com.likanug.dual.actor.LongbowArrowShaft;
-import com.likanug.dual.actor.PlayerActor;
+import com.likanug.dual.actor.arrow.LongbowArrowHead;
+import com.likanug.dual.actor.arrow.LongbowArrowShaft;
+import com.likanug.dual.actor.player.PlayerActor;
 import com.likanug.dual.inputDevice.AbstractInputDevice;
 import com.likanug.dual.particle.Particle;
 
@@ -50,7 +50,7 @@ public class DrawLongbowPlayerActorState extends DrawBowPlayerActorState {
         newArrow.setRotationAngle(parentActor.getAimAngle());
         newArrow.setVelocity(parentActor.getAimAngle(), 64);
 
-        final Particle newParticle = app.system.commonParticleSet.getBuilder()
+        final Particle newParticle = app.system.getCommonParticleSet().getBuilder()
                 .type(2)  // Line
                 .position(parentActor.getxPosition(), parentActor.getyPosition())
                 .polarVelocity(0, 0)
@@ -59,12 +59,9 @@ public class DrawLongbowPlayerActorState extends DrawBowPlayerActorState {
                 .lifespanSecond(2)
                 .weight(16)
                 .build();
-        app.system.commonParticleSet.getParticleList().add(newParticle);
-
+        app.system.getCommonParticleSet().getParticleList().add(newParticle);
         parentActor.getGroup().addArrow(newArrow);
-
-        app.system.screenShakeValue += 10;
-
+        app.system.setScreenShakeValue(app.system.getScreenShakeValue() + 10);
         parentActor.setChargedFrameCount(0);
         parentActor.setState(moveState.entryState(parentActor));
     }
@@ -94,7 +91,7 @@ public class DrawLongbowPlayerActorState extends DrawBowPlayerActorState {
 
         if (parentActor.getChargedFrameCount() != chargeRequiredFrameCount) return;
 
-        final Particle newParticle = app.system.commonParticleSet.getBuilder()
+        final Particle newParticle = app.system.getCommonParticleSet().getBuilder()
                 .type(3)  // Ring
                 .position(parentActor.getxPosition(), parentActor.getyPosition())
                 .polarVelocity(0, 0)
@@ -103,7 +100,7 @@ public class DrawLongbowPlayerActorState extends DrawBowPlayerActorState {
                 .weight(ringStrokeWeight)
                 .lifespanSecond(0)
                 .build();
-        app.system.commonParticleSet.getParticleList().add(newParticle);
+        app.system.getCommonParticleSet().getParticleList().add(newParticle);
     }
 
     public boolean isDrawingLongBow() {

@@ -20,10 +20,10 @@ public class StartGameState extends GameSystemState {
     }
 
     public void runSystem(GameSystem system) {
-        system.myGroup.update();
-        system.otherGroup.update();
-        system.myGroup.displayPlayer();
-        system.otherGroup.displayPlayer();
+        system.getMyGroup().update();
+        system.getOtherGroup().update();
+        system.getMyGroup().displayPlayer();
+        system.getOtherGroup().displayPlayer();
     }
 
     public void displayMessage(GameSystem system) {
@@ -46,7 +46,7 @@ public class StartGameState extends GameSystemState {
     public void checkStateTransition(GameSystem system) {
         if (properFrameCount >= frameCountPerNumber * 3) {
             float ringStrokeWeight = 5;
-            final Particle newParticle = system.commonParticleSet.getBuilder()
+            final Particle newParticle = system.getCommonParticleSet().getBuilder()
                     .type(3)  // Ring
                     .position(INTERNAL_CANVAS_SIDE_LENGTH * 0.5F, INTERNAL_CANVAS_SIDE_LENGTH * 0.5F)
                     .polarVelocity(0, 0)
@@ -55,9 +55,9 @@ public class StartGameState extends GameSystemState {
                     .weight(ringStrokeWeight)
                     .lifespanSecond(1)
                     .build();
-            system.commonParticleSet.getParticleList().add(newParticle);
+            system.getCommonParticleSet().getParticleList().add(newParticle);
 
-            system.currentState = new PlayGameState(app);
+            system.setCurrentState(new PlayGameState(app));
         }
     }
 

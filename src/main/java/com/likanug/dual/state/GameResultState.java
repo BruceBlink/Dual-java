@@ -17,17 +17,17 @@ public class GameResultState extends GameSystemState {
     }
 
     public void runSystem(GameSystem system) {
-        system.myGroup.update();
-        system.otherGroup.update();
-        system.myGroup.displayPlayer();
-        system.otherGroup.displayPlayer();
+        system.getMyGroup().update();
+        system.getOtherGroup().update();
+        system.getMyGroup().displayPlayer();
+        system.getOtherGroup().displayPlayer();
 
-        system.commonParticleSet.update();
-        system.commonParticleSet.display();
+        system.getCommonParticleSet().update();
+        system.getCommonParticleSet().display();
     }
 
     public void displayMessage(GameSystem system) {
-        if (system.demoPlay) return;
+        if (system.isDemoPlay()) return;
 
         app.fill(0);
         app.text(resultMessage, 0, 0);
@@ -40,12 +40,12 @@ public class GameResultState extends GameSystemState {
     }
 
     public void checkStateTransition(GameSystem system) {
-        if (system.demoPlay) {
+        if (system.isDemoPlay()) {
             if (properFrameCount > durationFrameCount * 3) {
-                app.newGame(true, system.showsInstructionWindow);
+                app.newGame(true, system.isShowsInstructionWindow());
             }
         } else {
-            if (properFrameCount > durationFrameCount && app.currentKeyInput.isXPressed) {
+            if (properFrameCount > durationFrameCount && app.getCurrentKeyInput().isXPressed) {
                 app.newGame(true, true);  // back to demoplay with instruction window
             }
         }

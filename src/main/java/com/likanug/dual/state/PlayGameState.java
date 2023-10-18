@@ -1,7 +1,12 @@
 package com.likanug.dual.state;
 
 import com.likanug.dual.App;
-import com.likanug.dual.actor.*;
+import com.likanug.dual.actor.Actor;
+import com.likanug.dual.actor.ActorGroup;
+import com.likanug.dual.actor.arrow.AbstractArrowActor;
+import com.likanug.dual.actor.player.AbstractPlayerActor;
+import com.likanug.dual.actor.player.NullPlayerActor;
+import com.likanug.dual.actor.player.PlayerActor;
 import com.likanug.dual.game.GameSystem;
 
 import static com.likanug.dual.App.FPS;
@@ -15,19 +20,19 @@ public class PlayGameState extends GameSystemState {
     }
 
     public void runSystem(GameSystem system) {
-        system.myGroup.update();
-        system.myGroup.act();
-        system.otherGroup.update();
-        system.otherGroup.act();
-        system.myGroup.displayPlayer();
-        system.otherGroup.displayPlayer();
-        system.myGroup.displayArrows();
-        system.otherGroup.displayArrows();
+        system.getMyGroup().update();
+        system.getMyGroup().act();
+        system.getOtherGroup().update();
+        system.getOtherGroup().act();
+        system.getMyGroup().displayPlayer();
+        system.getOtherGroup().displayPlayer();
+        system.getMyGroup().displayArrows();
+        system.getOtherGroup().displayArrows();
 
         checkCollision();
 
-        system.commonParticleSet.update();
-        system.commonParticleSet.display();
+        system.getCommonParticleSet().update();
+        system.getCommonParticleSet().display();
     }
 
     public void displayMessage(GameSystem system) {
@@ -38,16 +43,16 @@ public class PlayGameState extends GameSystemState {
     }
 
     public void checkStateTransition(GameSystem system) {
-        if (system.myGroup.getPlayer().isNull()) {
-            system.currentState = new GameResultState(app, "You lose.");
-        } else if (system.otherGroup.getPlayer().isNull()) {
-            system.currentState = new GameResultState(app, "You win.");
+        if (system.getMyGroup().getPlayer().isNull()) {
+            system.setCurrentState(new GameResultState(app, "You lose."));
+        } else if (system.getOtherGroup().getPlayer().isNull()) {
+            system.setCurrentState(new GameResultState(app, "You win."));
         }
     }
 
     public void checkCollision() {
-        final ActorGroup myGroup = app.system.myGroup;
-        final ActorGroup otherGroup = app.system.otherGroup;
+        final ActorGroup myGroup = app.system.getMyGroup();
+        final ActorGroup otherGroup = app.system.getOtherGroup();
 
         for (AbstractArrowActor eachMyArrow : myGroup.getArrowList()) {
             for (AbstractArrowActor eachEnemyArrow : otherGroup.getArrowList()) {
@@ -85,7 +90,7 @@ public class PlayGameState extends GameSystemState {
     public void killPlayer(AbstractPlayerActor player) {
         app.system.addSquareParticles(player.getxPosition(), player.getyPosition(), 50, 16, 2, 10, 4);
         player.getGroup().setPlayer(new NullPlayerActor(app));
-        app.system.screenShakeValue = 50;
+        app.system.setScreenShakeValue(50);
     }
 
     public void breakArrow(AbstractArrowActor arrow, ActorGroup group) {
@@ -98,7 +103,7 @@ public class PlayGameState extends GameSystemState {
         final float thrustAngle = relativeAngle + app.random((float) (-0.5 * HALF_PI), (float) (0.5 * HALF_PI));
         targetPlayerActor.setxVelocity(targetPlayerActor.getxVelocity() * 20);
         targetPlayerActor.setyVelocity(targetPlayerActor.getyVelocity() * 20);
-        targetPlayerActor.setState(app.system.damagedState.entryState(targetPlayerActor));
-        app.system.screenShakeValue += 10;
+        targetPlayerActor.setState(app.system.getDamagedState().entryState(targetPlayerActor));
+        app.system.setScreenShakeValue(app.system.getScreenShakeValue() + 10);
     }
 }
