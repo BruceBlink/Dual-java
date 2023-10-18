@@ -51,8 +51,8 @@ public class PlayGameState extends GameSystemState {
     }
 
     public void checkCollision() {
-        final ActorGroup myGroup = app.system.getMyGroup();
-        final ActorGroup otherGroup = app.system.getOtherGroup();
+        final ActorGroup myGroup = app.getSystem().getMyGroup();
+        final ActorGroup otherGroup = app.getSystem().getOtherGroup();
 
         for (AbstractArrowActor eachMyArrow : myGroup.getArrowList()) {
             for (AbstractArrowActor eachEnemyArrow : otherGroup.getArrowList()) {
@@ -88,13 +88,13 @@ public class PlayGameState extends GameSystemState {
     }
 
     public void killPlayer(AbstractPlayerActor player) {
-        app.system.addSquareParticles(player.getxPosition(), player.getyPosition(), 50, 16, 2, 10, 4);
+        app.getSystem().addSquareParticles(player.getxPosition(), player.getyPosition(), 50, 16, 2, 10, 4);
         player.getGroup().setPlayer(new NullPlayerActor(app));
-        app.system.setScreenShakeValue(50);
+        app.getSystem().setScreenShakeValue(50);
     }
 
     public void breakArrow(AbstractArrowActor arrow, ActorGroup group) {
-        app.system.addSquareParticles(arrow.getxPosition(), arrow.getyPosition(), 10, 7, 1, 5, 1);
+        app.getSystem().addSquareParticles(arrow.getxPosition(), arrow.getyPosition(), 10, 7, 1, 5, 1);
         group.getRemovingArrowList().add(arrow);
     }
 
@@ -103,7 +103,7 @@ public class PlayGameState extends GameSystemState {
         final float thrustAngle = relativeAngle + app.random((float) (-0.5 * HALF_PI), (float) (0.5 * HALF_PI));
         targetPlayerActor.setxVelocity(targetPlayerActor.getxVelocity() * 20);
         targetPlayerActor.setyVelocity(targetPlayerActor.getyVelocity() * 20);
-        targetPlayerActor.setState(app.system.getDamagedState().entryState(targetPlayerActor));
-        app.system.setScreenShakeValue(app.system.getScreenShakeValue() + 10);
+        targetPlayerActor.setState(app.getSystem().getDamagedState().entryState(targetPlayerActor));
+        app.getSystem().setScreenShakeValue(app.getSystem().getScreenShakeValue() + 10);
     }
 }

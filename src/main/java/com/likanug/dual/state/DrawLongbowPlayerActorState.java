@@ -50,7 +50,7 @@ public class DrawLongbowPlayerActorState extends DrawBowPlayerActorState {
         newArrow.setRotationAngle(parentActor.getAimAngle());
         newArrow.setVelocity(parentActor.getAimAngle(), 64);
 
-        final Particle newParticle = app.system.getCommonParticleSet().getBuilder()
+        final Particle newParticle = app.getSystem().getCommonParticleSet().getBuilder()
                 .type(2)  // Line
                 .position(parentActor.getxPosition(), parentActor.getyPosition())
                 .polarVelocity(0, 0)
@@ -59,9 +59,9 @@ public class DrawLongbowPlayerActorState extends DrawBowPlayerActorState {
                 .lifespanSecond(2)
                 .weight(16)
                 .build();
-        app.system.getCommonParticleSet().getParticleList().add(newParticle);
+        app.getSystem().getCommonParticleSet().getParticleList().add(newParticle);
         parentActor.getGroup().addArrow(newArrow);
-        app.system.setScreenShakeValue(app.system.getScreenShakeValue() + 10);
+        app.getSystem().setScreenShakeValue(app.getSystem().getScreenShakeValue() + 10);
         parentActor.setChargedFrameCount(0);
         parentActor.setState(moveState.entryState(parentActor));
     }
@@ -91,7 +91,7 @@ public class DrawLongbowPlayerActorState extends DrawBowPlayerActorState {
 
         if (parentActor.getChargedFrameCount() != chargeRequiredFrameCount) return;
 
-        final Particle newParticle = app.system.getCommonParticleSet().getBuilder()
+        final Particle newParticle = app.getSystem().getCommonParticleSet().getBuilder()
                 .type(3)  // Ring
                 .position(parentActor.getxPosition(), parentActor.getyPosition())
                 .polarVelocity(0, 0)
@@ -100,7 +100,7 @@ public class DrawLongbowPlayerActorState extends DrawBowPlayerActorState {
                 .weight(ringStrokeWeight)
                 .lifespanSecond(0)
                 .build();
-        app.system.getCommonParticleSet().getParticleList().add(newParticle);
+        app.getSystem().getCommonParticleSet().getParticleList().add(newParticle);
     }
 
     public boolean isDrawingLongBow() {
