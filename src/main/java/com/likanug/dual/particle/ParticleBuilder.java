@@ -19,7 +19,7 @@ public class ParticleBuilder {
     private float strokeWeightValue;
     private int displaySize;
 
-    private int lifespanFrameCount;
+    private float lifespanFrameCount;
 
     public ParticleBuilder(App app) {
         this.app = app;
@@ -80,12 +80,12 @@ public class ParticleBuilder {
         return this;
     }
 
-    public ParticleBuilder lifespan(int v) {
+    public ParticleBuilder lifespan(float v) {
         lifespanFrameCount = v;
         return this;
     }
 
-    public ParticleBuilder lifespanSecond(int v) {
+    public ParticleBuilder lifespanSecond(float v) {
         lifespan(v * FPS);
         return this;
     }

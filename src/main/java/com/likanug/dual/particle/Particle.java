@@ -22,7 +22,7 @@ public class Particle extends GameObject implements Poolable<Particle> {
     private float strokeWeightValue;
     private float displaySize;
 
-    private int lifespanFrameCount;
+    private float lifespanFrameCount;
     private int properFrameCount;
     private int particleTypeNumber;
 
@@ -169,11 +169,11 @@ public class Particle extends GameObject implements Poolable<Particle> {
         this.displaySize = displaySize;
     }
 
-    public int getLifespanFrameCount() {
+    public float getLifespanFrameCount() {
         return lifespanFrameCount;
     }
 
-    public void setLifespanFrameCount(int lifespanFrameCount) {
+    public void setLifespanFrameCount(float lifespanFrameCount) {
         this.lifespanFrameCount = lifespanFrameCount;
     }
 
