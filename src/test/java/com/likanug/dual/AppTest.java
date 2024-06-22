@@ -21,7 +21,7 @@ public class AppTest {
 
     @Test
     void testAppSize() {
-        assertEquals(640, App.INTERNAL_CANVAS_SIDE_LENGTH);
+        assertEquals(640, App.INTERNAL_CANVAS_SIDE_WIDTH);
         assertEquals(60, App.FPS);
     }
 }

@@ -12,7 +12,7 @@ import com.likanug.dual.playerEngine.PlayerEngine;
 import com.likanug.dual.state.*;
 
 import static com.likanug.dual.App.FPS;
-import static com.likanug.dual.App.INTERNAL_CANVAS_SIDE_LENGTH;
+import static com.likanug.dual.App.INTERNAL_CANVAS_SIDE_WIDTH;
 import static processing.core.PConstants.*;
 
 public class GameSystem {
@@ -51,13 +51,13 @@ public class GameSystem {
         if (demo) myEngine = new ComputerPlayerEngine(app);
         else myEngine = new HumanPlayerEngine(app.getCurrentKeyInput());
         PlayerActor myPlayer = new PlayerActor(myEngine, 255, app);
-        myPlayer.setxPosition(INTERNAL_CANVAS_SIDE_LENGTH * 0.5F);
-        myPlayer.setyPosition(INTERNAL_CANVAS_SIDE_LENGTH - 100);
+        myPlayer.setxPosition(INTERNAL_CANVAS_SIDE_WIDTH * 0.5F);
+        myPlayer.setyPosition(INTERNAL_CANVAS_SIDE_WIDTH - 100);
         myPlayer.setState(moveState);
         this.myGroup.setPlayer(myPlayer);
         PlayerEngine otherEngine = new ComputerPlayerEngine(app);
         PlayerActor otherPlayer = new PlayerActor(otherEngine, 0, app);
-        otherPlayer.setxPosition((float) (INTERNAL_CANVAS_SIDE_LENGTH * 0.5));
+        otherPlayer.setxPosition((float) (INTERNAL_CANVAS_SIDE_WIDTH * 0.5));
         otherPlayer.setyPosition(100);
         otherPlayer.setState(moveState);
         this.otherGroup.setPlayer(otherPlayer);
@@ -152,10 +152,10 @@ public class GameSystem {
         app.strokeWeight(2);
         app.fill(255, 240);
         app.rect(
-                INTERNAL_CANVAS_SIDE_LENGTH * 0.5F,
-                INTERNAL_CANVAS_SIDE_LENGTH * 0.5F,
-                INTERNAL_CANVAS_SIDE_LENGTH * 0.7F,
-                INTERNAL_CANVAS_SIDE_LENGTH * 0.6F
+                INTERNAL_CANVAS_SIDE_WIDTH * 0.5F,
+                INTERNAL_CANVAS_SIDE_WIDTH * 0.5F,
+                INTERNAL_CANVAS_SIDE_WIDTH * 0.7F,
+                INTERNAL_CANVAS_SIDE_WIDTH * 0.6F
         );
 
         app.textFont(App.smallFont, 20);
@@ -170,8 +170,8 @@ public class GameSystem {
         app.text("Lethal shot\n (manual aiming,\n  requires charge)", 300, 250);
         app.text("Move\n (or aim lethal shot)", 300, 345);
         app.textAlign(CENTER);
-        app.text("- Press Z key to start -", INTERNAL_CANVAS_SIDE_LENGTH * 0.5F, 430);
-        app.text("(Click to hide this window)", INTERNAL_CANVAS_SIDE_LENGTH * 0.5F, 475);
+        app.text("- Press Z key to start -", INTERNAL_CANVAS_SIDE_WIDTH * 0.5F, 430);
+        app.text("(Click to hide this window)", INTERNAL_CANVAS_SIDE_WIDTH * 0.5F, 475);
         app.popStyle();
 
         app.strokeWeight(1);

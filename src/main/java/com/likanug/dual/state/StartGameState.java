@@ -5,7 +5,7 @@ import com.likanug.dual.game.GameSystem;
 import com.likanug.dual.particle.Particle;
 
 import static com.likanug.dual.App.FPS;
-import static com.likanug.dual.App.INTERNAL_CANVAS_SIDE_LENGTH;
+import static com.likanug.dual.App.INTERNAL_CANVAS_SIDE_WIDTH;
 import static processing.core.PConstants.HALF_PI;
 import static processing.core.PConstants.TWO_PI;
 
@@ -48,7 +48,7 @@ public class StartGameState extends GameSystemState {
             float ringStrokeWeight = 5;
             final Particle newParticle = system.getCommonParticleSet().getBuilder()
                     .type(3)  // Ring
-                    .position(INTERNAL_CANVAS_SIDE_LENGTH * 0.5F, INTERNAL_CANVAS_SIDE_LENGTH * 0.5F)
+                    .position(INTERNAL_CANVAS_SIDE_WIDTH * 0.5F, INTERNAL_CANVAS_SIDE_WIDTH * 0.5F)
                     .polarVelocity(0, 0)
                     .particleSize((int) ringSize)
                     .particleColor(0)

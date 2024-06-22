@@ -4,7 +4,7 @@ import com.likanug.dual.App;
 import com.likanug.dual.playerEngine.PlayerEngine;
 
 import static com.likanug.dual.App.FPS;
-import static com.likanug.dual.App.INTERNAL_CANVAS_SIDE_LENGTH;
+import static com.likanug.dual.App.INTERNAL_CANVAS_SIDE_WIDTH;
 import static processing.core.PApplet.constrain;
 import static processing.core.PApplet.sq;
 import static processing.core.PConstants.TWO_PI;
@@ -61,7 +61,6 @@ public class PlayerActor extends AbstractPlayerActor {
     }
 
 
-
     public void addVelocity(float xAcceleration, float yAcceleration) {
         xVelocity = constrain(xVelocity + xAcceleration, -10, 10);
         yVelocity = constrain(yVelocity + yAcceleration, -7, 7);
@@ -79,16 +78,16 @@ public class PlayerActor extends AbstractPlayerActor {
             xPosition = halfBodySize;
             xVelocity = (float) (-0.5 * xVelocity);
         }
-        if (xPosition > INTERNAL_CANVAS_SIDE_LENGTH - halfBodySize) {
-            xPosition = INTERNAL_CANVAS_SIDE_LENGTH - halfBodySize;
+        if (xPosition > INTERNAL_CANVAS_SIDE_WIDTH - halfBodySize) {
+            xPosition = INTERNAL_CANVAS_SIDE_WIDTH - halfBodySize;
             xVelocity = (float) (-0.5 * xVelocity);
         }
         if (yPosition < halfBodySize) {
             yPosition = halfBodySize;
             yVelocity = (float) (-0.5 * yVelocity);
         }
-        if (yPosition > INTERNAL_CANVAS_SIDE_LENGTH - halfBodySize) {
-            yPosition = INTERNAL_CANVAS_SIDE_LENGTH - halfBodySize;
+        if (yPosition > INTERNAL_CANVAS_SIDE_WIDTH - halfBodySize) {
+            yPosition = INTERNAL_CANVAS_SIDE_WIDTH - halfBodySize;
             yVelocity = (float) (-0.5 * yVelocity);
         }
 

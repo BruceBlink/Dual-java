@@ -3,7 +3,7 @@ package com.likanug.dual.state;
 import com.likanug.dual.App;
 import com.likanug.dual.game.GameSystem;
 
-import static com.likanug.dual.App.INTERNAL_CANVAS_SIDE_LENGTH;
+import static com.likanug.dual.App.INTERNAL_CANVAS_SIDE_WIDTH;
 
 public abstract class GameSystemState {
 
@@ -17,7 +17,7 @@ public abstract class GameSystemState {
     public void run(GameSystem system) {
         runSystem(system);
 
-        app.translate(INTERNAL_CANVAS_SIDE_LENGTH * 0.5F, INTERNAL_CANVAS_SIDE_LENGTH * 0.5F);
+        app.translate(INTERNAL_CANVAS_SIDE_WIDTH * 0.5F, INTERNAL_CANVAS_SIDE_WIDTH * 0.5F);
         displayMessage(system);
 
         checkStateTransition(system);

@@ -9,7 +9,8 @@ public class App extends PApplet {
 
 
     public static final int FPS = 60;
-    public static final int INTERNAL_CANVAS_SIDE_LENGTH = 640;
+    public static final int INTERNAL_CANVAS_SIDE_WIDTH = 1920;
+    public static final int INTERNAL_CANVAS_SIDE_HEIGHT = 1080;
     public static PFont smallFont, largeFont;
 
     private KeyInput currentKeyInput;
@@ -18,13 +19,35 @@ public class App extends PApplet {
 
     private boolean paused;
 
-    public static void main(String[] args) {
-        App.main("com.likanug.dual.App");
+    public KeyInput getCurrentKeyInput() {
+        return currentKeyInput;
     }
+
+    public void setCurrentKeyInput(KeyInput currentKeyInput) {
+        this.currentKeyInput = currentKeyInput;
+    }
+
+    public GameSystem getSystem() {
+        return system;
+    }
+
+    public void setSystem(GameSystem system) {
+        this.system = system;
+    }
+
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
+    }
+
 
     @Override
     public void settings() {
-        size(INTERNAL_CANVAS_SIDE_LENGTH, INTERNAL_CANVAS_SIDE_LENGTH);
+        size(INTERNAL_CANVAS_SIDE_WIDTH, INTERNAL_CANVAS_SIDE_HEIGHT);
+
     }
 
 
@@ -49,6 +72,7 @@ public class App extends PApplet {
     public void newGame(boolean demo, boolean instruction) {
         system = new GameSystem(demo, instruction, this);
     }
+
     @Override
     public void draw() {
         background(255);
@@ -58,11 +82,6 @@ public class App extends PApplet {
     @Override
     public void mousePressed() {
         system.setShowsInstructionWindow(!system.isShowsInstructionWindow());
-    }
-
-    @Override
-    public void mouseClicked() {
-        super.mouseClicked();
     }
 
     @Override
@@ -112,28 +131,8 @@ public class App extends PApplet {
         }
     }
 
-
-    public KeyInput getCurrentKeyInput() {
-        return currentKeyInput;
+    public static void main(String[] args) {
+        App.main("com.likanug.dual.App");
     }
 
-    public void setCurrentKeyInput(KeyInput currentKeyInput) {
-        this.currentKeyInput = currentKeyInput;
-    }
-
-    public GameSystem getSystem() {
-        return system;
-    }
-
-    public void setSystem(GameSystem system) {
-        this.system = system;
-    }
-
-    public boolean isPaused() {
-        return paused;
-    }
-
-    public void setPaused(boolean paused) {
-        this.paused = paused;
-    }
 }
