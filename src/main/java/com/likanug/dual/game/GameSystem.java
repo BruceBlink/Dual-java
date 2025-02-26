@@ -123,6 +123,7 @@ public class GameSystem {
     }
 
     public void run() {
+        //演示模式
         if (demoPlay) {
             if (app.getCurrentKeyInput().isZPressed) {
                 app.setSystem(new GameSystem(app));  // stop demo and start game

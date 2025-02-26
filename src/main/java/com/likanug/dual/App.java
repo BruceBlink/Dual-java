@@ -9,8 +9,8 @@ public class App extends PApplet {
 
 
     public static final int FPS = 60;
-    public static final int INTERNAL_CANVAS_SIDE_WIDTH = 1920;
-    public static final int INTERNAL_CANVAS_SIDE_HEIGHT = 1080;
+    public static final int INTERNAL_CANVAS_SIDE_WIDTH = 640;
+    public static final int INTERNAL_CANVAS_SIDE_HEIGHT = 640;
     public static PFont smallFont, largeFont;
 
     private KeyInput currentKeyInput;
